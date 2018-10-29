@@ -1,5 +1,9 @@
 # Bakery
-# Boilermaker
+
+A project by:
+
+Micaela O'Herron
+
 
 _Good things come in pairs_
 
