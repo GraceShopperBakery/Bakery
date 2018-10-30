@@ -15,7 +15,7 @@ const Product = db.define('product', {
     defaultValue: [],
     allowNull: false,
     get () {
-      return this.getDataValue('tags'), join(',')
+      return this.getDataValue('category').join(',')
     }
   },
   imageURL:{
