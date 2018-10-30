@@ -5,6 +5,7 @@ class Shop extends Component {
     render() {
         return (
             //list all products here
+            <div></div>
         )
     }
 }

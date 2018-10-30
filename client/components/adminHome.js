@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-const adminHome = (props) => {
+const AdminHome = (props) => {
   
   return (
-    
+    <div></div>
   )
 }
 
