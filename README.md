@@ -4,6 +4,8 @@ A project by:
 
 Micaela O'Herron
 Maria Sanchez
+Alizah Lalani
+Magdalena Aichinger
 
 _Good things come in pairs_
 
