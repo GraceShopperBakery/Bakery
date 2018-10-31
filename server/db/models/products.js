@@ -4,7 +4,7 @@ const db = require('../db')
 const Product = db.define('product', {
   title: {
     type: Sequelize.STRING,
-    unique: true,
+    git: true,
     allowNull: false
   },
   description: {
