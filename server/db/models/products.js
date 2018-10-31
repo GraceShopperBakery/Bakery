@@ -10,14 +10,6 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT,
   },
-  category: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    defaultValue: [],
-    allowNull: false,
-    // get () {
-    //   return this.getDataValue('category').join(',')
-    // }
-  },
   imageURL:{
     type: Sequelize.TEXT,
     allowNull: false,

@@ -7,13 +7,13 @@ const OrderQty = db.define('orderqty', {
     type: Sequelize.INTEGER,
     defaultValue: 0
   },
-  price: {
+  priceWhenOrdered: {
     type: Sequelize.FLOAT,
   },
   total: {
     type: Sequelize.VIRTUAL,
     get() {
-      return this.getDataValue('quantity') * this.getDataValue('price')
+      return this.getDataValue('quantity') * this.getDataValue('priceWhenOrdered')
     }
   }
 });
@@ -21,7 +21,7 @@ const OrderQty = db.define('orderqty', {
 OrderQty.beforeCreate(async function (instance) {
   try {
     const product = await Product.findById(instance.productId)
-    instance.price = product.price
+    instance.priceWhenOrdered = product.price
   } catch (err) {
     console.log(err)
   }
