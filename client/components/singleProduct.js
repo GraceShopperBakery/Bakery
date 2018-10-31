@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 
 class SingleProduct extends Component { 
   render() { 
-    return ()
+    return (
+      <div></div>
+    )
   }
 }
 
