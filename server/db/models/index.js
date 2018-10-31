@@ -16,15 +16,14 @@ User.hasMany(Review);
 Product.belongsToMany(Category, {through: 'product-categories'})
 Category.belongsToMany(Product, {through: 'product-categories'})
 
+Order.belongsToMany(Product, {through: OrderQty})
+Product.belongsToMany(Order, {through: OrderQty})
+
 Order.belongsTo(User);
 Order.hasMany(OrderQty)
 
 Review.belongsTo(User);
 Review.belongsTo(Product);
-
-OrderQty.belongsTo(Order);
-OrderQty.belongsTo(Product);
-Product.hasMany(OrderQty);
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
