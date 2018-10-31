@@ -14,9 +14,9 @@ const Product = db.define('product', {
     type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: [],
     allowNull: false,
-    get () {
-      return this.getDataValue('category').join(',')
-    }
+    // get () {
+    //   return this.getDataValue('category').join(',')
+    // }
   },
   imageURL:{
     type: Sequelize.TEXT,

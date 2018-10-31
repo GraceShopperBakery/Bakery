@@ -5,17 +5,49 @@ import {fetchProducts} from '../store/products'
 
 
 class Shop extends Component {
+  constructor(props){
+    super(props);
+    this.handleChange=this.handleChange.bind(this);
+    this.handleClear=this.handleClear.bind(this);
+    this.state = {
+      filteredProducts: []
+    }
+  }
 
   componentDidMount(){
     this.props.fetchProducts()
   }
-  render() {
-    console.log('!!!!!', this.props.products)
+
+  handleChange(event){
+    let filteredProducts = this.props.products.filter(product => product.category.includes(event.target.value))
+    this.setState({filteredProducts: filteredProducts})
+  }
   
+  handleClear(){
+    this.setState({filteredProducts: []})
+  }
+
+  render() {
+  
+    let categories=[]
+
+    this.props.products.map((product) =>
+      product.category.map(item => !categories.includes(item) ? categories.push(item) : null)
+    )
+
+    let currentProduct; 
+    this.state.filteredProducts.length> 0 ? currentProduct = this.state.filteredProducts : currentProduct = this.props.products;
+    
     return (
       <div>
         
-        { this.props.products.map(product => (
+        <div>
+          {categories.map(category => (
+            <button key={category} type="button" onClick={this.handleChange} value={category}>{category}</button>
+            ))}
+          <button type="button" value="Clear Filer" onClick={this.handleClear}>Clear Filters</button>
+        </div>
+        { currentProduct.map(product => (
           <div key={product.id}>
           <figure className="product">
             <div className="product-figure">
