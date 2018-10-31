@@ -2,18 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
-const MyAccount = ({handleClick, isLoggedIn}) => {
+const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
   return (
     <div>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          {isAdmin ? <Redirect to="/admin">Home</Redirect> : <Redirect to="/home">Home</Redirect>}
         </div>
       ) : (
         <div>
@@ -28,7 +28,8 @@ const MyAccount = ({handleClick, isLoggedIn}) => {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 

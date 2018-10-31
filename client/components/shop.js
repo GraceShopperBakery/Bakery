@@ -54,6 +54,7 @@ class Shop extends Component {
               <Link to={`/shop/${product.id}`}>{product.title}</Link>
             </div>
             <img src={product.imageURL} alt={product.title} width="200px" height="200px" />
+            <li>Price: ${product.price}</li>
           </figure>
           </div>
         ))}
@@ -65,7 +66,7 @@ class Shop extends Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.products
+    products: state.products.products
   }
 }
 
