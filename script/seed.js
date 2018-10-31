@@ -9,10 +9,11 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'murphy@email.com', password: '123'}),
+    User.create({email: 'admin@bakery.com', password: '123', isAdmin: true})
   ])
   const order = await Promise.all([
-    Order.create({userId: 1}),
+    Order.create({userId:1}),
     Order.create({userId:1}),
     Order.create({userId:2}),
     Order.create({userId:2}),

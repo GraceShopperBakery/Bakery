@@ -21,7 +21,7 @@ const Product = db.define('product', {
   imageURL:{
     type: Sequelize.TEXT,
     allowNull: false,
-    defaultValue: "https://tmbidigitalassetsazure.blob.core.windows.net/secure/RMS/attachments/37/1200x1200/Mint-Patty-Cake_exps140673_CMT2426390C08_17_2b_RMS.jpg"
+    defaultValue: "https://goo.gl/uQaUUp"
   },
   inventoryQuantity:{
     type: Sequelize.INTEGER,

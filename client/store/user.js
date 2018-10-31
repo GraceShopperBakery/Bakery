@@ -40,7 +40,12 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    const user = res.data;
+    if (user.isAdmin) {
+      history.push('/admin')
+    } else { 
+      history.push('/home')
+    }
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
