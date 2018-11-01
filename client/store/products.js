@@ -38,6 +38,15 @@ export const fetchProducts = () => async dispatch => {
   }
 }
 
+export const fetchProduct = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/${id}`)
+    dispatch(getProducts(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const fetchCategories = () => async dispatch => {
   try {
     const res = await axios.get('/api/products/categories')
