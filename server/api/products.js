@@ -24,6 +24,19 @@ router.get('/categories', async (req,res,next) => {
   }
 })
 
+router.get('/:productId', async (req, res, next) => {
+  try {
+    const products = await Product.findOne({
+      where:{
+        id: req.params.productId
+      },
+      include:{model: Category}
+    });
+    res.json(products)
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', (req, res, next) => {
   let productInst;
