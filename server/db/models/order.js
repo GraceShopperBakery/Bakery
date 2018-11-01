@@ -4,7 +4,7 @@ const OrderQty = require('./orderQty')
 
 const Order = db.define('order', {
   isCart: {
-    type: Sequelize.Boolean,
+    type: Sequelize.BOOLEAN,
     defaultValue: true
   },
   finalTotal: {
