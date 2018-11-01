@@ -18,17 +18,4 @@ const OrderQty = db.define('orderqty', {
   }
 });
 
-OrderQty.beforeCreate(async function (instance) {
-  try {
-    const product = await Product.findById(instance.productId)
-    instance.priceWhenOrdered = product.price
-  } catch (err) {
-    console.log(err)
-  }
-})
-
-
-
-
-
 module.exports = OrderQty

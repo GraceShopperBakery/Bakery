@@ -4,7 +4,34 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include:{model: Category}
+    });
+    res.json(products)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/categories', async (req,res,next) => {
+  try{
+    const categories = await Category.findAll({
+      include:{model: Product}
+    });
+    res.json(categories)
+  } catch(err){
+    next(err)
+  }
+})
+
+router.get('/:productId', async (req, res, next) => {
+  try {
+    const products = await Product.findOne({
+      where:{
+        id: req.params.productId
+      },
+      include:{model: Category}
+    });
     res.json(products)
   } catch (err) {
     next(err)

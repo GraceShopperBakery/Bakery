@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 
 const Navbar = (props) => (
@@ -10,6 +10,7 @@ const Navbar = (props) => (
       <Link to="/about">About</Link>
       <Link to="/shop">Shop</Link>
       <Link to="/myAccount">My Account</Link>
+      <Link to="/cart">Cart</Link>
       
     </nav>
     <hr />

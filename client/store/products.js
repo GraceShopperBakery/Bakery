@@ -7,14 +7,19 @@ const GET_PRODUCTS = 'GET_PRODUCTS'
 const WRITE_PRODUCT = 'WRITE_PRODUCT'
 const GOT_NEW_PRODUCT_FROM_SERVER = 'GOT_NEW_PRODUCT_FROM_SERVER'
 const ADMIN_UPDATE_PRODUCT = 'ADMIN_UPDATE_PRODUCT'
+const GET_PRODUCT = 'GET_PRODUCT'
+const GOT_NEW_PRODUCT_FROM_SERVER = 'GOT_NEW_PRODUCT_FROM_SERVER'
+const WRITE_PRODUCT = "WRITE_PRODUCT"
+const GET_CATEGORIES = 'GET_CATEGORIES'
 
 /**
  * INITIAL STATE
  */
 const initialState = {
   products: [],
-  newProduct: {},
   product: {},
+  newProduct: {},
+  categories: []
 }
 
 
@@ -22,10 +27,12 @@ const initialState = {
  * ACTION CREATORS
  */
 const getProducts = products => ({ type: GET_PRODUCTS, products })
+const getProduct = product => ({ type: GET_PRODUCT, product: product })
 export const writeProduct = inputContent => ({ type: WRITE_PRODUCT, newProduct: inputContent })
 const gotNewProductFromServer = product => ({ type: GOT_NEW_PRODUCT_FROM_SERVER, product})
 export const adminUpdateProduct = product => ({ type: ADMIN_UPDATE_PRODUCT, product})
 
+const getCategories = categories => ({type: GET_CATEGORIES, categories })
 
 /**
  * THUNK CREATORS
@@ -34,6 +41,24 @@ export const fetchProducts = () => async dispatch => {
   try {
     const res = await axios.get('/api/products')
     dispatch(getProducts(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const fetchProduct = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/${id}`)
+    dispatch(getProduct(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const fetchCategories = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/products/categories')
+    dispatch(getCategories(res.data))
   } catch (err) {
     console.error(err)
   }
@@ -66,12 +91,16 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return { ...state, products: action.products }
+    case GET_PRODUCT:
+      return { ...state, product: action.product }
     case WRITE_PRODUCT:
       return { ...state, newProduct: action.newProduct }
     case GOT_NEW_PRODUCT_FROM_SERVER:
       return { ...state, products: [ ...state.products, action.product]}
     case ADMIN_UPDATE_PRODUCT:
       return { ...state, product: action.product}
+    case GET_CATEGORIES:
+      return { ...state, categories: action.categories }
     default:
       return state
   }
