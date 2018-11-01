@@ -15,7 +15,70 @@ nav a {
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
+} */
+
+.form {
+  align-items: center;
+  color: rgb(0, 9, 128);
+  height: 50%;
+  width: 30%;
+  font-weight: bold;
+  position: sticky;
+  top: 15%;
 }
+
+.form-control{
+  width: 100%;
+  padding: 2%;
+}
+
+.input{
+  width: 90%;
+  margin-left: 10%;
+  height: 1.5em;
+  font-size: 100%;
+  color:  rgb(0, 9, 128);
+}
+
+#button{
+  background-color: rgb(0, 9, 128);
+  color: white;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+input,textarea{
+  border: 2px solid rgb(0, 9, 128);
+}
+
+.adminAddProduct{
+  display: flex
+}
+
+.allProductsPage{
+  display: flex;
+  flex-direction: column
+}
+
+.products{
+  display:flex;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+}
+
+.required{
+  padding:1%;
+  font-size:.75em;
+  font-style: italic;
+  text-align: right
+}
+
+#button:disabled{
+  background-color: gray;
+  border: none
+}
+
