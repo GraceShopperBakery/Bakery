@@ -3,9 +3,9 @@ const db = require('../db')
 const OrderQty = require('./orderQty')
 
 const Order = db.define('order', {
-  status: {
-    type: Sequelize.ENUM('complete', 'pending'),
-    defaultValue: 'pending'
+  isCart: {
+    type: Sequelize.Boolean,
+    defaultValue: true
   },
   finalTotal: {
     type: Sequelize.FLOAT,
