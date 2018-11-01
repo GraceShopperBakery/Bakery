@@ -33,3 +33,13 @@ router.post('/', (req, res, next) => {
     .then(product => res.status(201).send(product))
     .catch()
 });
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const productToUpdate = await Product.findById(req.params.id)
+    const updatedProduct = await productToUpdate.update(req.body)
+    res.status(201).json(updatedProduct)
+  } catch (err) {
+    next(err);
+  }
+})
