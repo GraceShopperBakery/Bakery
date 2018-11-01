@@ -11,7 +11,6 @@ class Shop extends Component {
     this.handleChange=this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
-    this.showCart = this.showCart.bind(this)
 
     this.state = {
       filteredProducts: []
@@ -41,7 +40,7 @@ class Shop extends Component {
 
   render() {
   
-    let currentProduct; 
+    let currentProduct = []; 
     this.state.filteredProducts.length> 0 ? currentProduct = this.state.filteredProducts : currentProduct = this.props.products;
 
     return (
