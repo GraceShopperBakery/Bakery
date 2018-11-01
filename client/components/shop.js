@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchProducts} from '../store/products'
+import {fetchProducts, fetchCategories} from '../store/products'
 
 
 class Shop extends Component {
@@ -16,10 +16,13 @@ class Shop extends Component {
 
   componentDidMount(){
     this.props.fetchProducts()
+    this.props.fetchCategories()
   }
 
   handleChange(event){
-    let filteredProducts = this.props.products.filter(product => product.category.includes(event.target.value))
+    let filteredProducts = []
+    this.props.products.map(product => product.categories.map(category => category.name===event.target.value?
+      filteredProducts.push(product) : null))
     this.setState({filteredProducts: filteredProducts})
   }
   
@@ -29,26 +32,20 @@ class Shop extends Component {
 
   render() {
   
-    let categories=[]
-
-    this.props.products.map((product) =>
-      product.category.map(item => !categories.includes(item) ? categories.push(item) : null)
-    )
-
     let currentProduct; 
     this.state.filteredProducts.length> 0 ? currentProduct = this.state.filteredProducts : currentProduct = this.props.products;
-    
+
     return (
       <div>
         
         <div>
-          {categories.map(category => (
-            <button key={category} type="button" onClick={this.handleChange} value={category}>{category}</button>
+          {this.props.categories.map(category => (
+            <button key={category.id} type="button" onClick={this.handleChange} value={category.name}>{category.name}</button>
             ))}
           <button type="button" value="Clear Filer" onClick={this.handleClear}>Clear Filters</button>
         </div>
         { currentProduct.map(product => (
-          <div key={product.id}>
+          <div key={product.id} >
           <figure className="product">
             <div className="product-figure">
               <Link to={`/shop/${product.id}`}>{product.title}</Link>
@@ -66,13 +63,15 @@ class Shop extends Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.products.products
+    products: state.products.products,
+    categories: state.products.categories
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchCategories: () => dispatch(fetchCategories())
   }
 }
 
