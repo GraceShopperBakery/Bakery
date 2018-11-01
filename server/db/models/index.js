@@ -9,21 +9,21 @@ const Category = require('./categories')
  * Associations
  */
 
-Product.hasMany(Review);
-User.hasMany(Order);
-User.hasMany(Review);
+Product.hasMany(Review)
+User.hasMany(Order)
+User.hasMany(Review)
 
 Product.belongsToMany(Category, {through: 'product-categories'})
 Category.belongsToMany(Product, {through: 'product-categories'})
 
-Order.belongsToMany(Product, {through: OrderQty})
+Order.belongsToMany(Product, {through: OrderQty}) 
 Product.belongsToMany(Order, {through: OrderQty})
 
-Order.belongsTo(User);
+Order.belongsTo(User)
 Order.hasMany(OrderQty)
 
-Review.belongsTo(User);
-Review.belongsTo(Product);
+Review.belongsTo(User)
+Review.belongsTo(Product)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -33,5 +33,5 @@ Review.belongsTo(Product);
  */
 
 module.exports = {
-  User, Product, Review, Order, OrderQty
+  User, Product, Review, Order, OrderQty, Category
 }
