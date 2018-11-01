@@ -7,17 +7,10 @@ Maria Sanchez
 Alizah Lalani
 Magdalena Aichinger
 
-_Good things come in pairs_
-
-Looking to mix up a backend with express/sequelize and a frontend with react/redux? That's `boilermaker`!
-
-Follow along with the workshop to make your own! This canonical version can serve as a reference, or a starting point all on its own.
-
 ## Setup
 
-To use this boilerplate, you'll need to take the following steps:
+To fire up our bakery:
 
-* Don't fork or clone this repo! Instead, create a new, empty directory on your machine and `git init` (or create an empty repo on Github and clone it to your local machine)
 * Run the following commands:
 
 ```
