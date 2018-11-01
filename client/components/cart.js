@@ -17,10 +17,11 @@ class Cart extends Component {
               <li>Price per unit: {product.price}</li>
               <li>Quantity: {product.quantity}</li>
               <li>Subtotal: {product.price * product.quantity}</li>
+              <br />
             </div>
           )
         })}
-        <div>Total: {total}</div>
+        <div>Total: {total.toFixed(2)}</div>
       </div>
     )
   }
