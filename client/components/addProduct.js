@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { writeProduct, postProduct } from '../store/products'
+import { writeProduct, postProduct} from '../store/products'
+import Shop from './shop'
 
 class AddProduct extends Component { 
   constructor(props) { 
@@ -10,7 +11,7 @@ class AddProduct extends Component {
       description: "",
       imageURL: "https://goo.gl/uQaUUp",
       category: [],
-      price: 0.00,
+      price: 3.99,
       inventoryQuantity: 0
     }
 
@@ -33,14 +34,23 @@ class AddProduct extends Component {
     this.props.post(this.state)
   }
 
+  disable(){
+    if (this.state.category.length ===0 || this.state.title === ''){
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() { 
     return (
+      <div className='adminAddProduct'>
       <form className="form" onChange={this.handleChange} onSubmit={this.handleSubmit}>
         <h3>Add a New Product</h3>
         <div className="form-group">
-          <label htmlFor="title" >Name</label>
+          <label htmlFor="title" >Name*</label>
           <div className="form-control">
-            <input name="title" type="text" className="input" />
+            <input name="title" type="text" className="input" required/>
           </div>
         </div>
         <div className="form-group">
@@ -62,9 +72,9 @@ class AddProduct extends Component {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="category" >'Category (separate by comma if more than one)'</label>
+          <label htmlFor="category" >Category (separate by comma if more than one)*</label>
           <div className="form-control">
-            <input name="category" type="text" className="input" />
+            <input name="category" type="text" className="input" required/>
           </div>
         </div>
         <div className="form-group">
@@ -73,20 +83,25 @@ class AddProduct extends Component {
             <input name="inventoryQuantity" type="number" className="input" />
           </div>
         </div>
+        <div className="required">All fields marked with * are required.</div>
         <div className="form-group">
-            <button id= "button" type="submit">submit</button>
+            <button id= "button" type="submit" disabled={this.disable()}>submit</button>
         </div>
       </form>
+      <div className='shop'>
+        <Shop />
+      </div>
+      </div>
     )
   }
 }
 
 
-const mapStateToProps = state => { 
-  return {
-    newProduct: state.products.newProduct
-  }
-}
+// const mapStateToProps = state => { 
+//   return {
+//     newProduct: state.products.newProduct
+//   }
+// }
 
 const mapDispatchToProps = dispatch => { 
   return {
@@ -95,4 +110,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddProduct)
+export default connect(null, mapDispatchToProps)(AddProduct)

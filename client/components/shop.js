@@ -36,7 +36,7 @@ class Shop extends Component {
     this.state.filteredProducts.length> 0 ? currentProduct = this.state.filteredProducts : currentProduct = this.props.products;
 
     return (
-      <div>
+      <div className='allProductsPage'>
         
         <div>
           {this.props.categories.map(category => (
@@ -44,6 +44,7 @@ class Shop extends Component {
             ))}
           <button type="button" value="Clear Filer" onClick={this.handleClear}>Clear Filters</button>
         </div>
+        <div className='products'>
         { currentProduct.map(product => (
           <div key={product.id} >
           <figure className="product">
@@ -55,6 +56,7 @@ class Shop extends Component {
           </figure>
           </div>
         ))}
+        </div>
       </div>
       
     )
