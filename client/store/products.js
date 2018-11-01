@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_PRODUCTS = 'GET_PRODUCTS'
+const GET_PRODUCT = 'GET_PRODUCT'
 const GOT_NEW_PRODUCT_FROM_SERVER = 'GOT_NEW_PRODUCT_FROM_SERVER'
 const WRITE_PRODUCT = "WRITE_PRODUCT"
 const GET_CATEGORIES = 'GET_CATEGORIES'
@@ -13,6 +14,7 @@ const GET_CATEGORIES = 'GET_CATEGORIES'
  */
 const initialState = {
   products: [],
+  product: {},
   newProduct: {},
   categories: []
 }
@@ -22,6 +24,7 @@ const initialState = {
  * ACTION CREATORS
  */
 const getProducts = products => ({ type: GET_PRODUCTS, products })
+const getProduct = product => ({ type: GET_PRODUCT, product: product })
 export const writeProduct = inputContent => ({ type: WRITE_PRODUCT, newProduct: inputContent })
 const gotNewProductFromServer = product => ({ type: GOT_NEW_PRODUCT_FROM_SERVER, product})
 const getCategories = categories => ({type: GET_CATEGORIES, categories })
@@ -41,7 +44,7 @@ export const fetchProducts = () => async dispatch => {
 export const fetchProduct = (id) => async dispatch => {
   try {
     const res = await axios.get(`/api/products/${id}`)
-    dispatch(getProducts(res.data))
+    dispatch(getProduct(res.data))
   } catch (err) {
     console.error(err)
   }
@@ -74,6 +77,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return { ...state, products: action.products }
+    case GET_PRODUCT:
+      return { ...state, product: action.product }
     case WRITE_PRODUCT:
       return { ...state, newProduct: action.newProduct }
     case GOT_NEW_PRODUCT_FROM_SERVER:

@@ -6,16 +6,13 @@ import {fetchProduct} from '../store/products'
 class SingleProduct extends Component { 
 
   componentDidMount () {
-    console.log('PROPS', this.props)
     let id = this.props.match.params.productId
     this.props.fetchProduct(id)
-    console.log('ID', id)
   }
   
   render() { 
-    console.log('PRODUCT', this.props.product)
     return (
-      this.props.product.length === 0 ?
+      this.props.product === {} ?
         <div id="invalid">
             <h1>This product does not exist.</h1>
         </div>
@@ -38,7 +35,7 @@ class SingleProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.products.products,
+    product: state.products.product,
   }
 }
 
