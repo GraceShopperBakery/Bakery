@@ -13,7 +13,8 @@ import {
   Cart,
   AdminHome,
   SingleProduct,
-  AddProduct
+  AddProduct,
+  UpdateProduct,
 } from './components'
 import {me} from './store'
 
@@ -44,6 +45,7 @@ class Routes extends Component {
             {/* Routes placed here are only available to admin after logging in */}
             <Route exact path="/admin" component={AdminHome} />
             <Route path="/admin/addProduct" component={AddProduct} />
+            <Route path="/admin/updateProduct" component={UpdateProduct} />
           </Switch>
         )}
         {isLoggedIn && (
