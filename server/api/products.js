@@ -69,4 +69,30 @@ router.post('/', (req, res, next) => {
     })
     .then(product => res.status(201).send(product))
     .catch()
+});
+
+router.put('/:id', (req, res, next) => {
+  let productInst;
+  if(req.body.category){
+    Product.findById(req.params.id)
+    .then(product => product.update(req.body))
+    .then(product => {
+      productInst = product;
+      let categories = req.body.category.map(category => Category.findOrCreate({ where: { name: category }}))
+      return Promise.all(categories)
+    })
+    .then(categories => {
+      let catArray = categories.map(category => category[0])
+      productInst.setCategories(catArray)
+      return productInst
+    })
+    .then(product => res.send(product))
+    .catch()
+  }else{
+    Product.findById(req.params.id)
+    .then(product => product.update(req.body))
+    .then(product => res.send(product))
+    .catch()
+  }
+  
 })
