@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { updateProduct, fetchProducts } from '../store/products'
-import { runInThisContext } from 'vm';
+
 
 
 class UpdateProduct extends Component { 
