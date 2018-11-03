@@ -18,7 +18,15 @@ router.get('/categories', async (req,res,next) => {
     const categories = await Category.findAll({
       include:{model: Product}
     });
-    res.json(categories)
+
+    let result = []
+    categories.map(category => {
+      if (category.products.length > 0) {
+        result.push(category)
+      }
+    })
+
+    res.json(result)
   } catch(err){
     next(err)
   }
