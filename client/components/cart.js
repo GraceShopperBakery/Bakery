@@ -25,7 +25,6 @@ class Cart extends Component {
 
   render() {
     const cartProducts = Object.keys(this.props.cart)
-    console.log('this.props.cart', this.props.cart)
     let total = 0
 
     return (
