@@ -1,3 +1,4 @@
+
 // /* global describe beforeEach it */
 
 // import {expect} from 'chai'
@@ -20,3 +21,4 @@
 //     expect(navbar.find('h1').text()).to.be.equal("Grace's Cakes")
 //   })
 // })
+
