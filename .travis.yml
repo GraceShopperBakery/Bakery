@@ -16,12 +16,12 @@ install:
 before_script:
   - psql -c 'create database "bakery-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: hopperbakery # see README
+  api_key:
+    secure: P5f3Q3k1f9+fiZr2lAuKnNa9RbM0elxopeZLEVhHLyUBPedMlSQ/wT/sy6NtKvVvYWn93uxz+uh66ZYVrl5/ob1QZVzk1TnjhJ9YIOTKecNgjWd0sJnLoWKw4ou/ZYyngDfZpJApD785ADqXVO4I6jjaFYtpdsOSOYTEgidrsG5CUmX+2+/IdDyJ3XDlxZcXjk28/OCa/LR8u9SiCtMkcTzNN8jT14EqSJrv6LWCZ8d3LW4LXte/vZb2MWGAaPK/KaG8GKL7VwZN+7uC5j0Fjbsn9SAZCRKQNO7SpMw3HqCaxoUKGYVHaYXKJbMWhWjlSaWjcIgb52JyE05t36fBOzHc2kONFl3kFp3VdKfb7l36ft1vHbMW/uqxHF1FF/wXKbqJInaE0YXA3R6dJRscAK6BLeYi3IeVPv22O6mJul1vnw/J8K7Dt8WjJE7CMWFPX96ibyUH9rgmlSjN6aeQgCeuYQ53+1Un1DbaHlNVMTBI3qTMecDdjp8T/TOdIIT3eua9FgF2po2b0dc7cLwlriN/byF1UG3UvsHfCrEaSN0gUeIGvI0qWMc/Cu1l+ogK4jnOaAujV/SK6BTW4URrGMFVxoIROk1lI6xlQxPJDChCtbPCUJi9/ZyqymGXKNS4OZYJMcuu+3Vt89Dsio9yuh4MEBQqSBKYB+AsR2rWciA= # see README
