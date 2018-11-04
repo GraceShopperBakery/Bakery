@@ -29,25 +29,64 @@ async function seed() {
     order[4].setUser(users[1]),
   ])
 
-  const cakeProduct = await Product.create({title: 'Cake', description: 'fluffy'})
-  const cupcakeProduct = await Product.create({title: 'Cupcake', description: 'red velvet', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
-  const cookieProduct = await Product.create({ title: 'Chocolate Chip Cookie', description: 'extra chips', imageURL: 'https://bit.ly/2AF1skX' })
-  
-  const products = [cakeProduct, cupcakeProduct, cookieProduct]
+  const cakeProduct = await Product.create({title: 'Classic Chocolate Cake', description: 'light and fluffy'})
+  const cakeProduct1 = await Product.create({title: 'Confetti Cake', description: 'vanilla flavor filled with colorful confetti sprinkles'})
+  const cakeProduct2 = await Product.create({title: 'Carrot Cake', description: 'moist and fluffy'})
+  const cakeProduct3 = await Product.create({title: 'Banana Cake', description: 'light and fluffy'})
+  const cakeProduct4 = await Product.create({title: 'Coffee Cake', description: 'tasty and rich in flavor'})
+  const cakeProduct5 = await Product.create({title: 'German Chocolate Cake', description: 'fluffy rich chocolate'})
+  const cakeProduct6 = await Product.create({title: 'Red Velvet Cake', description: 'delicious fluffy chocolate'})
+  const cakeProduct7 = await Product.create({title: 'Lemon Cake', description: 'golden yellow, rich in flavor'})
+
+  const cupcakeProduct = await Product.create({title: 'Red Velvet Cupcake', description: 'rich and fluffy', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
+  const cupcakeProduct1 = await Product.create({title: 'Classic Yellow Cupcake', description: 'moist, golden yellow', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
+  const cupcakeProduct2 = await Product.create({title: 'Mini Cupcake', description: 'rich chocolate flavor', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
+  const cupcakeProduct3 = await Product.create({title: 'Pumpkin Cupcake', description: 'moist, light, and, golden brown', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
+  const cupcakeProduct4 = await Product.create({title: 'Chocolate Cupcake', description: 'rich chocolate flavor', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
+  const cupcakeProduct5 = await Product.create({title: 'Carrot Cupcake', description: 'light and fluffy', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
+  const cupcakeProduct6 = await Product.create({title: 'Coconut Cupcake', description: 'light and rich flavor', imageURL: 'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg' })
+
+  const cookieProduct = await Product.create({title: 'Chocolate Chip Cookie', description: 'extra chips', imageURL: 'https://bit.ly/2AF1skX' })
+  const cookieProduct1 = await Product.create({title: 'Peanut Butter Cookie', description: 'soft and chunky'})
+  const cookieProduct2 = await Product.create({title: 'Shortbread Cookie', description: 'buttery golden yellow'})
+  const cookieProduct3 = await Product.create({title: 'Oatmeal Raisin Cookie', description: 'soft and crunchy'})
+  const cookieProduct4 = await Product.create({title: 'White Chocolate Chip', description: 'chunky chips'})
+  const cookieProduct5 = await Product.create({title: 'Cookie Sandwich', description: 'filled with vanilla buttercream'})
+
+  const products = [cakeProduct, cupcakeProduct, cookieProduct, cakeProduct1, cakeProduct2, cakeProduct3, cakeProduct4, cakeProduct5, cakeProduct6, cakeProduct7, cupcakeProduct1, cupcakeProduct2, cupcakeProduct3, cupcakeProduct4, cupcakeProduct5, cupcakeProduct6, cookieProduct1, cookieProduct2, cookieProduct3, cookieProduct4, cookieProduct5]
 
   const category = await Promise.all([
     Category.create({ name: 'cake' }),
     Category.create({ name: 'chocolate' }),
     Category.create({ name: 'sweet' }),
     Category.create({ name: 'cupcake' }),
+    Category.create({ name: 'cookie'}),
     Category.create({ name: 'lowfat' }),
     Category.create({ name: 'soft' })
   ])
   
   await Promise.all([
     cakeProduct.addCategories([category[0], category[1], category[2]]),
-    cupcakeProduct.addCategories([category[3], category[2]]),
-    cookieProduct.addCategories([category[5], category[2], category[1]])
+    cakeProduct1.addCategories([category[0], category[2], category[6]]),
+    cakeProduct2.addCategories([category[0], category[2], category[5], category[6]]),
+    cakeProduct3.addCategories([category[0], category[2], category[5]]),
+    cakeProduct4.addCategories([category[0], category[2]]),
+    cakeProduct5.addCategories([category[0], category[1], category[2]]),
+    cakeProduct6.addCategories([category[0], category[1], category[2], category[6]]),
+    cakeProduct7.addCategories([category[0], category[2], category[5]]),
+    cupcakeProduct.addCategories([category[1], category[3], category[2]]),
+    cupcakeProduct1.addCategories([category[2], category[3], category[6]]),
+    cupcakeProduct2.addCategories([category[2], category[3]]),
+    cupcakeProduct3.addCategories([category[3], category[5]]),
+    cupcakeProduct4.addCategories([category[1], category[2], category[3]]),
+    cupcakeProduct5.addCategories([category[3]]),
+    cupcakeProduct6.addCategories([category[2], category[3]]),
+    cookieProduct.addCategories([category[5], category[2], category[1], category[4]]),
+    cookieProduct1.addCategories([category[5], category[4]]),
+    cookieProduct2.addCategories([category[2], category[4]]),
+    cookieProduct3.addCategories([category[2], category[4], category[6]]),
+    cookieProduct4.addCategories([category[1], category[2], category[4]]),
+    cookieProduct5.addCategories([category[2], category[4], category[6]])
   ])
 
   await Promise.all([
