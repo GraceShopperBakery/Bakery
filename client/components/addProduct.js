@@ -17,6 +17,7 @@ class AddProduct extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.formRef = null;
   }
 
   handleChange(evt) { 
@@ -32,6 +33,7 @@ class AddProduct extends Component {
   handleSubmit(evt) { 
     evt.preventDefault()
     this.props.post(this.state)
+    this.formRef.reset();
   }
 
   disable(){
@@ -45,7 +47,8 @@ class AddProduct extends Component {
   render() { 
     return (
       <div className='adminAddProduct'>
-      <form className="form" onChange={this.handleChange} onSubmit={this.handleSubmit}>
+      <div className='addProductForm'>
+      <form className="form" ref={(ref) => {this.formRef = ref}} onChange={this.handleChange} onSubmit={this.handleSubmit}>
         <h3>Add a New Product</h3>
         <div className="form-group">
           <label htmlFor="title" >Name*</label>
@@ -88,6 +91,7 @@ class AddProduct extends Component {
             <button id= "button" type="submit" disabled={this.disable()}>submit</button>
         </div>
       </form>
+      </div>
       <div className='shop'>
         <Shop />
       </div>
