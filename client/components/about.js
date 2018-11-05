@@ -42,7 +42,7 @@ const About = props => {
           </p>
         </figure>
         <figure>
-          <img src="./images/team/alizah.jpg" />
+          <img src="./images/team/maria.jpg" />
           <h5>Maria</h5>
           <span>Pastry Artist</span>
           <p>Every pastry is a work of art, and Maria ensures your treat is not only delicious, 

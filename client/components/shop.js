@@ -86,7 +86,7 @@ class Shop extends Component {
                     />
 
                   <div className="checkout">
-                    <li>${product.price}</li>
+                    <li>${(product.price).toFixed(2)}</li>
                     <button
                       type="button"
                       name={product.title}

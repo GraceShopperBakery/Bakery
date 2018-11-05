@@ -29,232 +29,242 @@ async function seed() {
     order[4].setUser(users[1])
   ])
 
-  const cakeProduct = await Product.create({
-    title: 'Classic Chocolate Cake',
-    description: 'light and fluffy'
+  const carrotCookie = await Product.create({
+    title: 'Carrot Compost Cookie',
+    description: "Our signature item, the cookie that started it all- a medley of sweet and salty flavors on your pallete. Pretzels, carrots, potato chips, coffee, oats, graham cracker, butterscotch, chocolate chips.",
+    imageURL: "https://bit.ly/2Opener",
+    price: 3.00
   })
-  const cakeProduct1 = await Product.create({
-    title: 'Confetti Cake',
-    description: 'vanilla flavor filled with colorful confetti sprinkles'
+  const carrotCake = await Product.create({
+    title: 'Naked Carrot Layer Cake',
+    description: 'Vanilla spice carrot cake, milk crumbs, roasted pumpkin ganache, dulce de leche, and roasted pepitas.',
+    imageURL:"https://bit.ly/2qx5t4V",
+    price: 20.00
   })
-  const cakeProduct2 = await Product.create({
-    title: 'Carrot Cake',
-    description: 'moist and fluffy'
+  const carrotMacaron = await Product.create({
+    title: 'Carrot Macarons',
+    description: 'Set of 3 macarons. Perfectly crunchy. Perfectly soft. Perfect.',
+    imageURL:"https://bit.ly/2F1pMS7",
+    price: 7.00
   })
-  const cakeProduct3 = await Product.create({
-    title: 'Banana Cake',
-    description: 'light and fluffy'
+  const honeyBunny = await Product.create({
+    title: 'Honey Bunny',
+    description: 'Set of 4 whimsical bunny buns. Flavors change on a daily basis.',
+    imageURL:"https://bit.ly/2DmXa4h",
+    price: 10.00
   })
-  const cakeProduct4 = await Product.create({
-    title: 'Coffee Cake',
-    description: 'tasty and rich in flavor'
+  const hopPocket = await Product.create({
+    title: 'Hop Pocket',
+    description: 'Savory, flaky pastry. Ham, Cheese, Love.',
+    imageURL:"https://bit.ly/2SL8ueZ",
+    price: 5.50
   })
-  const cakeProduct5 = await Product.create({
-    title: 'German Chocolate Cake',
-    description: 'fluffy rich chocolate'
+  const chocolateEclair = await Product.create({
+    title: 'Chocolate Eclhare',
+    description: 'Vanilla pastry cream filling, rich ganache chocolate glaze.',
+    imageURL:"https://bit.ly/2ANxQlv",
+    price: 3.50
   })
-  const cakeProduct6 = await Product.create({
-    title: 'Red Velvet Cake',
-    description: 'delicious fluffy chocolate'
+  const pbj = await Product.create({
+    title: 'Peanut Bunny and Jelly',
+    description: 'Crunchy peanut butter, with a rotating flavor of seasonal jam. Crustless just like mom used to make it.',
+    imageURL:"https://bit.ly/2D4gfHx",
+    price: 7.00
   })
-  const cakeProduct7 = await Product.create({
-    title: 'Lemon Cake',
-    description: 'golden yellow, rich in flavor'
-  })
-
-  const cupcakeProduct = await Product.create({
-    title: 'Red Velvet Cupcake',
-    description: 'rich and fluffy',
-    imageURL:
-      'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg'
-  })
-  const cupcakeProduct1 = await Product.create({
-    title: 'Classic Yellow Cupcake',
-    description: 'moist, golden yellow',
-    imageURL:
-      'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg'
-  })
-  const cupcakeProduct2 = await Product.create({
-    title: 'Mini Cupcake',
-    description: 'rich chocolate flavor',
-    imageURL:
-      'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg'
-  })
-  const cupcakeProduct3 = await Product.create({
-    title: 'Pumpkin Cupcake',
-    description: 'moist, light, and, golden brown',
-    imageURL:
-      'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg'
-  })
-  const cupcakeProduct4 = await Product.create({
-    title: 'Chocolate Cupcake',
-    description: 'rich chocolate flavor',
-    imageURL:
-      'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg'
-  })
-  const cupcakeProduct5 = await Product.create({
-    title: 'Carrot Cupcake',
-    description: 'light and fluffy',
-    imageURL:
-      'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg'
-  })
-  const cupcakeProduct6 = await Product.create({
-    title: 'Coconut Cupcake',
-    description: 'light and rich flavor',
-    imageURL:
-      'http://fullhdwall.com/wp-content/uploads/2018/02/Nice-Cupcake-360x260.jpg'
+  const bananaPudding = await Product.create({
+    title: 'Bunnana Surprise',
+    description: 'Vanilla-banana pudding, vanilla infused milk, white chocolate, walnuts.',
+    imageURL:"https://bit.ly/2qvCUFc",
+    price: 6.50
   })
 
-  const cookieProduct = await Product.create({
-    title: 'Chocolate Chip Cookie',
-    description: 'extra chips',
-    imageURL: 'https://bit.ly/2AF1skX'
+  const cupcake = await Product.create({
+    title: 'Peep Cupcake',
+    description: 'Vanilla cake, rainbow cake crumbs, marshmallow frosting.',
+    imageURL:
+      'https://bit.ly/2F6MfO1',
+    price: 3.50
   })
-  const cookieProduct1 = await Product.create({
-    title: 'Peanut Butter Cookie',
-    description: 'soft and chunky',
-    imageURL: 'https://bit.ly/2AF1skX'
+  const bundt = await Product.create({
+    title: 'Bunny Bundts',
+    description: "Make your friends and family 'hoppy' with this mosit cholocate cake with velvety cream cheese frosting.",
+    imageURL: 'https://bit.ly/2JFbg1l',
+    price: 25.00
   })
-  const cookieProduct2 = await Product.create({
-    title: 'Shortbread Cookie',
-    description: 'buttery golden yellow',
-    imageURL: 'https://bit.ly/2AF1skX'
+  const bagel = await Product.create({
+    title: 'Hoppyseed Bagel',
+    description: 'A New York staple, now avaialble at all our stores worldwide.',
+    imageURL:
+      'https://bit.ly/2SNHATS',
+    price: 3.00
   })
-  const cookieProduct3 = await Product.create({
-    title: 'Oatmeal Raisin Cookie',
-    description: 'soft and crunchy',
-    imageURL: 'https://bit.ly/2AF1skX'
+  const cheeseBread = await Product.create({
+    title: 'Hopbañero Cheese Bread',
+    description: 'Golden brown. Crispy on the outside, soft on the inside. A perfect blend of cheesy and spicy.',
+    imageURL:
+      'https://bit.ly/2RE4ko1',
+    price: 8.00
   })
-  const cookieProduct4 = await Product.create({
-    title: 'White Chocolate Chip',
-    description: 'chunky chips',
-    imageURL: 'https://bit.ly/2AF1skX'
+  const cinammonRoll = await Product.create({
+    title: 'Cinnabun Roll',
+    description: 'Flour, cinnamon, sugar, and butter. Heavenly smell, heavenly taste.',
+    imageURL:
+      'https://bit.ly/2ANRApg',
+    price: 5.00
   })
-  const cookieProduct5 = await Product.create({
-    title: 'Cookie Sandwich',
-    description: 'filled with vanilla buttercream',
-    imageURL: 'https://bit.ly/2AF1skX'
+  const cookie = await Product.create({
+    title: 'Ear-resistable Cookie',
+    description: "Sugar cookie, vanilla frosting. Melts in your mouth.",
+    imageURL:
+      'https://bit.ly/2AOUNox',
+    price: 3.00
+  })
+  const bunnyChow = await Product.create({
+    title: 'Bunny Chow',
+    description: '10 oz. Cereal, melted chocolate, peanut butter, and powdered sugar.',
+    imageURL:
+      'https://bit.ly/2Orzi0y',
+    price: 10.00
+  })
+
+  const lemonPie = await Product.create({
+    title: 'Lemon Hareingue Pie',
+    description: 'Lemon custard filling with a fluffy meringue topping.',
+    imageURL: 'https://bit.ly/2yUG7Te',
+    price: 18.00
+  })
+  const oats = await Product.create({
+    title: 'Bunny Bunches of Oats',
+    description: 'Peaches, oats, almond milk, chia seeds.',
+    imageURL: 'https://bit.ly/2RwrxrY',
+    price: 6.50
+  })
+  const iceCream = await Product.create({
+    title: 'Bunnycomb Ice Cream',
+    description: 'Warm puff pastry, milk ice cream, corn flakes, brûlée bananas, whipped cream, white chocolate honey comb.',
+    imageURL: 'https://bit.ly/2qrKgcM',
+    price: 10.00
+  })
+  const nutBread = await Product.create({
+    title: 'Bunnana Nut Bread',
+    description: 'One slice- bananas, flour, eggs, honey, walnuts.',
+    imageURL: 'https://bit.ly/2qt2kmH',
+    price: 5.00
+  })
+  const cobblerPie = await Product.create({
+    title: 'Hoppler Pie',
+    description: 'Flaky crust, melt in your mouth filling with pecans, peaches, and sugar.',
+    imageURL: 'https://bit.ly/2EZPab0',
+    price: 18.00
+  })
+  const carrot = await Product.create({
+    title: 'Carrot',
+    description: 'Hard chocolate shell, with soft carrot filling. perfect for your little ones for no mess eating.',
+    imageURL: 'https://bit.ly/2SN87k7',
+    price: 7.00
   })
 
   const products = [
-    cakeProduct,
-    cupcakeProduct,
-    cookieProduct,
-    cakeProduct1,
-    cakeProduct2,
-    cakeProduct3,
-    cakeProduct4,
-    cakeProduct5,
-    cakeProduct6,
-    cakeProduct7,
-    cupcakeProduct1,
-    cupcakeProduct2,
-    cupcakeProduct3,
-    cupcakeProduct4,
-    cupcakeProduct5,
-    cupcakeProduct6,
-    cookieProduct1,
-    cookieProduct2,
-    cookieProduct3,
-    cookieProduct4,
-    cookieProduct5
+    carrotCookie,
+    carrotCake,
+    carrotMacaron,
+    honeyBunny,
+    hopPocket,
+    chocolateEclair,
+    pbj,
+    bananaPudding,
+    cupcake,
+    bundt,
+    bagel,
+    cheeseBread,
+    cinammonRoll,
+    cookie,
+    bunnyChow,
+    lemonPie,
+    oats,
+    iceCream,
+    nutBread,
+    cobblerPie,
+    carrot
   ]
 
   const category = await Promise.all([
-    Category.create({name: 'cake'}),
-    Category.create({name: 'chocolate'}),
-    Category.create({name: 'sweet'}),
-    Category.create({name: 'cupcake'}),
-    Category.create({name: 'cookie'}),
-    Category.create({name: 'lowfat'}),
-    Category.create({name: 'soft'})
+    Category.create({name: 'cake'}), //0
+    Category.create({name: 'cookie'}), //1
+    Category.create({name: 'pie'}), //2
+    Category.create({name: 'chocolate'}), //3
+    Category.create({name: 'sweet'}), //4
+    Category.create({name: 'savory'}), //5
+    Category.create({name: 'carrot'}), //6
   ])
 
   await Promise.all([
-    cakeProduct.addCategories([category[0], category[1], category[2]]),
-    cakeProduct1.addCategories([category[0], category[2], category[6]]),
-    cakeProduct2.addCategories([
-      category[0],
-      category[2],
-      category[5],
-      category[6]
-    ]),
-    cakeProduct3.addCategories([category[0], category[2], category[5]]),
-    cakeProduct4.addCategories([category[0], category[2]]),
-    cakeProduct5.addCategories([category[0], category[1], category[2]]),
-    cakeProduct6.addCategories([
-      category[0],
-      category[1],
-      category[2],
-      category[6]
-    ]),
-    cakeProduct7.addCategories([category[0], category[2], category[5]]),
-    cupcakeProduct.addCategories([category[1], category[3], category[2]]),
-    cupcakeProduct1.addCategories([category[2], category[3], category[6]]),
-    cupcakeProduct2.addCategories([category[2], category[3]]),
-    cupcakeProduct3.addCategories([category[3], category[5]]),
-    cupcakeProduct4.addCategories([category[1], category[2], category[3]]),
-    cupcakeProduct5.addCategories([category[3]]),
-    cupcakeProduct6.addCategories([category[2], category[3]]),
-    cookieProduct.addCategories([
-      category[5],
-      category[2],
-      category[1],
-      category[4]
-    ]),
-    cookieProduct1.addCategories([category[5], category[4]]),
-    cookieProduct2.addCategories([category[2], category[4]]),
-    cookieProduct3.addCategories([category[2], category[4], category[6]]),
-    cookieProduct4.addCategories([category[1], category[2], category[4]]),
-    cookieProduct5.addCategories([category[2], category[4], category[6]])
+    carrotCookie.addCategories([category[1], category[3], category[4], category[5], category[6]]),
+    carrotCake.addCategories([category[0], category[4], category[6]]),
+    carrotMacaron.addCategories([category[4], category[6]]),
+    honeyBunny.addCategories([category[4]]),
+    hopPocket.addCategories([category[5]]),
+    chocolateEclair.addCategories([category[3], category[4]]),
+    pbj.addCategories([category[4], category[5]]),
+    bananaPudding.addCategories([category[4]]),
+    cupcake.addCategories([category[0], category[4]]),
+    bundt.addCategories([category[0], category[4], category[3]]),
+    bagel.addCategories([category[5]]),
+    cheeseBread.addCategories([category[5]]),
+    cinammonRoll.addCategories([category[4]]),
+    cookie.addCategories([category[1], category[4]]),
+    bunnyChow.addCategories([category[4], category[5]]),
+    lemonPie.addCategories([category[2], category[4]]),
+    oats.addCategories([category[4]]),
+    iceCream.addCategories([category[4]]),
+    nutBread.addCategories([category[4]]),
+    cobblerPie.addCategories([category[2], category[4]]),
+    carrot.addCategories([category[3], category[4], category[6]])
   ])
 
   await Promise.all([
-    order[0].addProduct(cupcakeProduct, {
-      through: {quantity: 2, priceWhenOrdered: cupcakeProduct.price}
+    order[0].addProduct(carrot, {
+      through: {quantity: 2, priceWhenOrdered: carrot.price}
     }),
-    order[0].addProduct(cakeProduct, {
-      through: {quantity: 1, priceWhenOrdered: cakeProduct.price}
+    order[0].addProduct(iceCream, {
+      through: {quantity: 1, priceWhenOrdered: iceCream.price}
     }),
-    order[1].addProduct(cookieProduct, {
-      through: {quantity: 1, priceWhenOrdered: cookieProduct.price}
+    order[1].addProduct(nutBread, {
+      through: {quantity: 1, priceWhenOrdered: nutBread.price}
     }),
-    order[1].addProduct(cupcakeProduct, {
-      through: {quantity: 4, priceWhenOrdered: cupcakeProduct.price}
+    order[1].addProduct(cobblerPie, {
+      through: {quantity: 4, priceWhenOrdered: cobblerPie.price}
     }),
-    order[2].addProduct(cookieProduct, {
-      through: {quantity: 5, priceWhenOrdered: cookieProduct.price}
+    order[2].addProduct(bagel, {
+      through: {quantity: 5, priceWhenOrdered: bagel.price}
     }),
-    order[2].addProduct(cakeProduct, {
-      through: {quantity: 2, priceWhenOrdered: cakeProduct.price}
+    order[2].addProduct(cupcake, {
+      through: {quantity: 2, priceWhenOrdered: cupcake.price}
     }),
-    order[3].addProduct(cupcakeProduct, {
-      through: {quantity: 1, priceWhenOrdered: cupcakeProduct.price}
+    order[3].addProduct(hopPocket, {
+      through: {quantity: 1, priceWhenOrdered: hopPocket.price}
     }),
-    order[3].addProduct(cakeProduct, {
-      through: {quantity: 3, priceWhenOrdered: cakeProduct.price}
-    }),
-    order[4].addProduct(cookieProduct, {
-      through: {quantity: 2, priceWhenOrdered: cookieProduct.price}
+    order[4].addProduct(carrotMacaron, {
+      through: {quantity: 2, priceWhenOrdered: carrotMacaron.price}
     })
   ])
 
   const review = await Promise.all([
     Review.create({
       rating: 5,
-      content: "this cake was extra delicious. can'nt wait to order another.",
+      content: "this was extra delicious. can'nt wait to order another.",
       productId: 1,
       userId: 1
     }),
     Review.create({
       rating: 2,
-      content: 'this cupcake was gross, tasted icky',
+      content: 'this was gross, tasted icky',
       productId: 2,
       userId: 2
     }),
     Review.create({
       rating: 3,
-      content: 'this cookie was dry',
+      content: 'this was dry',
       productId: 3,
       userId: 2
     })
