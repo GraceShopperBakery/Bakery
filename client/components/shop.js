@@ -53,42 +53,48 @@ class Shop extends Component {
 
     return (
       <div className="allProductsPage">
-        <div>
-          {this.props.categories.map(category => (
-            <button
-              key={category.id}
-              type="button"
-              onClick={this.handleChange}
-              value={category.name}
-            >
-              {category.name}
-            </button>
-          ))}
-          <button type="button" value="Clear Filer" onClick={this.handleClear}>
-            Clear Filters
-          </button>
+        <div className = "categoryFilters">
+          <select onChange={this.handleChange}>
+            <option>All</option>
+            {this.props.categories.map(category => (
+              <option
+                key={category.id}
+                value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <div className="box">
+            <h1>Need a custom order?</h1>
+            <a href="mailto:customerservicer@hopper.com">Contact us!</a>
+          </div>
         </div>
         <div className="products">
           {currentProduct.map(product => (
             <div key={product.id}>
               <figure className="product">
-                <div className="product-figure">
-                  <Link to={`/shop/${product.id}`}>{product.title}</Link>
+                <div className="spacing">
+                    <div className="product-figure">
+                      <Link to={`/shop/${product.id}`}>{product.title}</Link>
+                    </div>
+                  
+                    <img
+                      src={product.imageURL}
+                      alt={product.title}
+                      width="300px"
+                      height="300px"
+                    />
+
+                  <div className="checkout">
+                    <li>${product.price}</li>
+                    <button
+                      type="button"
+                      name={product.title}
+                      onClick={this.handleAddToCart}>
+                      Add To Cart
+                    </button>
+                  </div>
                 </div>
-                <img
-                  src={product.imageURL}
-                  alt={product.title}
-                  width="200px"
-                  height="200px"
-                />
-                <li>Price: ${product.price}</li>
-                <button
-                  type="button"
-                  name={product.title}
-                  onClick={this.handleAddToCart}
-                >
-                  Add To Cart
-                </button>
               </figure>
             </div>
           ))}
