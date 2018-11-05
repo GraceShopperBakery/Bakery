@@ -34,8 +34,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={Home} />
-        <Route path="/about" component={UserManagement} />
-
+        <Route path="/about" component={About} />
         <Route exact path="/shop/:productId" component={SingleProduct} />
         <Route exact path="/shop" component={Shop} />
         <Route path="/myAccount" component={MyAccount} />
@@ -48,7 +47,7 @@ class Routes extends Component {
             <Route exact path="/admin" component={AdminHome} />
             <Route path="/admin/addProduct" component={AddProduct} />
             <Route path="/admin/updateProduct" component={UpdateProduct} />
-            <Route exact path="/admin/users" component={UserManagement} />
+            <Route path="/admin/users" component={UserManagement} />
           </Switch>
         )}
         {isLoggedIn && (
