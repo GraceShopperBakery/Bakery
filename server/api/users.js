@@ -37,3 +37,15 @@ router.post('/', (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:userId', (req, res, next) => {
+  try {
+    User.destroy({
+      where: {
+        id: req.params.userId
+      }
+    })
+  } catch (err) {
+    next(err)
+  }
+})

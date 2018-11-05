@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {users, postUser} from '../store/users'
-
-// addUser will add to front end
-// postUser will add to database
-// want to render all users ?
+import {postUser, addUser, updateUser} from '../store/users'
+import Users from './users'
 
 class UserManagement extends Component {
   constructor(props) {
@@ -16,18 +13,22 @@ class UserManagement extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleMakeAdmin = this.handleMakeAdmin.bind(this)
   }
 
   handleChange(event) {
     const property = event.target.name
     let value = event.target.value
     this.setState({[property]: value})
-    // not adding it to front end for now
   }
 
+  handleMakeAdmin() {
+    this.props.updateUser(user, id)
+  }
   handleSubmit(event) {
     event.preventDefault()
     this.props.postUser(this.state)
+    this.props.addUser(this.state)
   }
 
   render() {
@@ -51,15 +52,9 @@ class UserManagement extends Component {
               <input name="password" type="text" className="input" required />
             </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="isAdmin">Make admin? *</label>
-
-            <label htmlFor="true">Yes</label>
-            <input name="isAdmin" type="radio" className="input" id="true" />
-
-            <label htmlFor="false">No</label>
-            <input name="isAdmin" type="radio" className="input" id="false" />
-          </div>
+          <button type="button" onClick={this.handleMakeAdmin}>
+            Make admin
+          </button>
           <div className="required">
             All fields marked with a * are required.
           </div>
@@ -68,7 +63,8 @@ class UserManagement extends Component {
           </button>
         </form>
         <div className="users" />
-        {/* add component to render all users? */}
+        <br />
+        <Users />
       </div>
     )
   }
@@ -82,6 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    addUser: user => dispatch(addUser(user)),
     postUser: user => dispatch(postUser(user))
   }
 }
