@@ -1,5 +1,6 @@
 body {
-  font-family: sans-serif;
+  font-family: "Lato",sans-serif;
+  color: #b7b7b7;
 }
 
 a {
@@ -82,3 +83,98 @@ input,textarea{
   border: none
 }
 
+
+#NavBar{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  height: 20%;
+  color: #b7b7b7;
+}
+
+#title h1{
+  font-family: 'Homemade Apple', cursive;
+  color: #DABC85;
+  font-size: 300%;
+  margin: 0;
+  padding:0;
+}
+
+#links{
+  font-family: "Lato",sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.083em;
+  text-transform: uppercase;
+}
+
+#links a{
+  color: #b7b7b7;
+}
+
+#links a:hover{
+  color: black;
+}
+
+.about{
+  display: flex;
+  margin: 5%;
+  margin-top: 0;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.083em;
+  justify-content: space-evenly
+}
+
+.ourStory{
+  width: 30%;
+  text-align: justify
+}
+
+.ourStory p{
+  font-size: 1.3em
+}
+
+.Team{
+  margin-left: 5%;
+  width: 60%;
+  text-align: center
+}
+
+.teamContainer{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center
+}
+
+
+.teamContainer figure{
+  width: 40%;
+  height: auto;
+  padding: 2%;
+  margin: 0;
+}
+
+.teamContainer img{
+  width: 100%;
+  height: auto;
+  border-radius: 16%;
+  box-sizing: border-box;
+}
+
+.teamContainer h5{
+  padding:0;
+  font-size: 2em;
+  margin:0
+}
+
+.teamContainer span{
+  font-size: 1.5em
+}
