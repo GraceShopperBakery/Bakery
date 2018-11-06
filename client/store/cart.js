@@ -3,7 +3,6 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
-const ADD_PRODUCT = 'ADD_PRODUCT'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const SET_CART = 'SET_CART'
 
@@ -14,7 +13,7 @@ const SET_CART = 'SET_CART'
 
 const defaultCart = {}
 
-export let prodTotal;
+export let prodTotal=0;
 
 
 /**
@@ -34,12 +33,12 @@ export const setCart = cart => ({type: SET_CART, cart})
 export const fetchCart = () => async dispatch => {
   try {
     const response = await axios.get('/api/cart')
-    const action = setCart(response.data)
+    const cart = response.data
     prodTotal = response.data.products.reduce((total, product) => {
-      total+= product.orderQty.quantity
-      console.log('total', total)
-      return total
+      return total + product.orderQty.quantity
     }, 0)
+    cart.prodTotal = prodTotal
+    const action = setCart(cart)
     dispatch(action)
   } catch (err) {
     console.log(err)

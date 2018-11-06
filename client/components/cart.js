@@ -26,7 +26,11 @@ class Cart extends Component {
     if (newQty < 1) this.props.removeProduct(productId)
     else this.props.updateProduct(productId, newQty)
     
-    document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
+    if(prodTotal>0){
+      document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
+    }else{
+      document.getElementById('cart').innerHTML = `Cart`
+    }
   }
 
   render() {
@@ -100,7 +104,7 @@ class Cart extends Component {
           </tbody>
           </table>
           <div className="total">
-            <h1>Total: {total.toFixed(2)}</h1>
+            <h1>Total: ${total.toFixed(2)}</h1>
             <button type="button">CHECKOUT</button>
           </div>
           </div>
