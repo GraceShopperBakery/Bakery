@@ -41,7 +41,7 @@ class Shop extends Component {
 
   handleAddToCart(event, productId) {
     event.preventDefault()
-    this.props.addProduct(productId, event.target)
+    this.props.addProduct(productId, event.target.orderQty.value)
     this.formRef.reset()
     event.target.orderQty.value = '1'
   }
