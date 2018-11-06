@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, fetchCategories} from '../store/products'
-import {addProduct} from '../store/cart'
+import {addProduct, prodTotal} from '../store/cart'
+
 
 class Shop extends Component {
   constructor(props) {
@@ -43,7 +44,9 @@ class Shop extends Component {
       product => product.title === event.target.name
     )
     this.props.addProduct(productToAdd)
+    document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
   }
+
 
   render() {
     let currentProduct = []
@@ -88,6 +91,7 @@ class Shop extends Component {
                   <div className="checkout">
                     <li>${(product.price).toFixed(2)}</li>
                     <button
+                      className='addToCart'
                       type="button"
                       name={product.title}
                       onClick={this.handleAddToCart}>
