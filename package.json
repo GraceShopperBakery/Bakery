@@ -40,6 +40,7 @@
     "axios": "^0.15.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
+    "css-loader": "^1.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
@@ -94,6 +95,7 @@
     "react-test-renderer": "^16.4.2",
     "redux-devtools-extension": "^2.13.5",
     "redux-mock-store": "^1.5.3",
+    "style-loader": "^0.23.1",
     "supertest": "^3.1.0",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0"

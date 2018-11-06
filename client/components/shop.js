@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, fetchCategories} from '../store/products'
 import {addProduct} from '../store/cart'
-import {toast} from 'react-toastify'
 
 class Shop extends Component {
   constructor(props) {
@@ -20,9 +19,6 @@ class Shop extends Component {
   componentDidMount() {
     this.props.fetchProducts()
     this.props.fetchCategories()
-  }
-  notify = () => {
-    toast('Default Notification !')
   }
 
   handleChange(event) {
