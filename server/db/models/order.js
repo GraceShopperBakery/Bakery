@@ -10,11 +10,10 @@ const Order = db.define('order', {
   finalTotal: {
     type: Sequelize.FLOAT,
     get() {
-      const totals =  OrderQty.findAll({
+      const totals = OrderQty.findAll({
         where: {
           orderId: this.id
-        },
-        include: ['total']
+        }
       })
     },
     set() {
@@ -23,18 +22,15 @@ const Order = db.define('order', {
   }
 })
 
-
-
 module.exports = Order
 
-
-Order.prototype.getTotal = async function () {
+Order.prototype.getTotal = async function() {
   const totals = await OrderQty.findAll({
     where: {
       orderId: this.id
     }
   })
-  console.log(totals, '******totals')
+  //console.log(totals, '******totals')
 }
 // Order.beforeCreate(async function (instance) {
 //   const totals = await OrderQty.findAll({
@@ -44,5 +40,3 @@ Order.prototype.getTotal = async function () {
 //   })
 //   console.log(totals, '******totals')
 // })
-
-

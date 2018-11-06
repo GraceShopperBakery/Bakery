@@ -10,6 +10,7 @@ class Shop extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleClear = this.handleClear.bind(this)
     this.handleAddToCart = this.handleAddToCart.bind(this)
+    this.formRef = 1
 
     this.state = {
       filteredProducts: []
@@ -38,11 +39,11 @@ class Shop extends Component {
     this.setState({filteredProducts: []})
   }
 
-  handleAddToCart(event) {
-    const productToAdd = this.props.products.find(
-      product => product.title === event.target.name
-    )
-    this.props.addProduct(productToAdd)
+  handleAddToCart(event, productId) {
+    event.preventDefault()
+    this.props.addProduct(productId, event.target)
+    this.formRef.reset()
+    event.target.orderQty.value = '1'
   }
 
   render() {
@@ -50,16 +51,15 @@ class Shop extends Component {
     this.state.filteredProducts.length > 0
       ? (currentProduct = this.state.filteredProducts)
       : (currentProduct = this.props.products)
+    const availableOrderQty = [...Array(11).keys()].slice(1)
 
     return (
       <div className="allProductsPage">
-        <div className = "categoryFilters">
+        <div className="categoryFilters">
           <select onChange={this.handleChange}>
             <option>All</option>
             {this.props.categories.map(category => (
-              <option
-                key={category.id}
-                value={category.name}>
+              <option key={category.id} value={category.name}>
                 {category.name}
               </option>
             ))}
@@ -74,25 +74,45 @@ class Shop extends Component {
             <div key={product.id}>
               <figure className="product">
                 <div className="spacing">
-                    <div className="product-figure">
-                      <Link to={`/shop/${product.id}`}>{product.title}</Link>
-                    </div>
-                  
-                    <img
-                      src={product.imageURL}
-                      alt={product.title}
-                      width="300px"
-                      height="300px"
-                    />
+                  <div className="product-figure">
+                    <Link to={`/shop/${product.id}`}>{product.title}</Link>
+                  </div>
+
+                  <img
+                    src={product.imageURL}
+                    alt={product.title}
+                    width="300px"
+                    height="300px"
+                  />
 
                   <div className="checkout">
-                    <li>${(product.price).toFixed(2)}</li>
-                    <button
-                      type="button"
-                      name={product.title}
-                      onClick={this.handleAddToCart}>
-                      Add To Cart
-                    </button>
+                    <li>${product.price.toFixed(2)}</li>
+                    <form
+                      onSubmit={event =>
+                        this.handleAddToCart(event, product.id)
+                      }
+                      ref={ref => {
+                        this.formRef = ref
+                      }}
+                    >
+                      <label>
+                        Quantity:&nbsp;
+                        <select
+                          className="qtyFilter"
+                          label="Quantity"
+                          name="orderQty"
+                        >
+                          {availableOrderQty.map(num => (
+                            <option key={num} value={num}>
+                              {num}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <button type="submit" name={product.title}>
+                        Add To Cart
+                      </button>
+                    </form>
                   </div>
                 </div>
               </figure>
@@ -117,7 +137,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     fetchCategories: () => dispatch(fetchCategories()),
-    addProduct: product => dispatch(addProduct(product))
+    addProduct: productId => dispatch(addProduct(productId))
   }
 }
 

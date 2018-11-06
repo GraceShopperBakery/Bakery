@@ -24,8 +24,8 @@ class Cart extends Component {
   }
 
   render() {
-    const cartProducts = Object.keys(this.props.cart)
-    let total = 0
+    const cartProducts = this.props.cart.products
+    const total = 0
 
     return (
       <div>

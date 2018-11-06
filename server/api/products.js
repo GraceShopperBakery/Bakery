@@ -5,19 +5,19 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      include:{model: Category}
-    });
+      include: {model: Category}
+    })
     res.json(products)
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/categories', async (req,res,next) => {
-  try{
+router.get('/categories', async (req, res, next) => {
+  try {
     const categories = await Category.findAll({
-      include:{model: Product}
-    });
+      include: {model: Product}
+    })
 
     let result = []
     categories.map(category => {
@@ -27,7 +27,7 @@ router.get('/categories', async (req,res,next) => {
     })
 
     res.json(result)
-  } catch(err){
+  } catch (err) {
     next(err)
   }
 })
@@ -35,11 +35,11 @@ router.get('/categories', async (req,res,next) => {
 router.get('/:productId', async (req, res, next) => {
   try {
     const products = await Product.findOne({
-      where:{
+      where: {
         id: req.params.productId
       },
-      include:{model: Category}
-    });
+      include: {model: Category}
+    })
     res.json(products)
   } catch (err) {
     next(err)
@@ -47,7 +47,7 @@ router.get('/:productId', async (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  let productInst;
+  let productInst
   Product.create({
     title: req.body.title,
     description: req.body.description,
@@ -55,10 +55,11 @@ router.post('/', (req, res, next) => {
     imageURL: req.body.imageURL,
     inventoryQuantity: req.body.inventoryQuantity
   })
-    .then(product => { 
-      productInst = product;
-      let categories = req.body.category.map(category => 
-        Category.findOrCreate({ where: { name: category } }))
+    .then(product => {
+      productInst = product
+      let categories = req.body.category.map(category =>
+        Category.findOrCreate({where: {name: category}})
+      )
       return Promise.all(categories)
     })
     .then(categories => {
@@ -68,30 +69,33 @@ router.post('/', (req, res, next) => {
     })
     .then(product => res.status(201).send(product))
     .catch()
-});
+})
 
 router.put('/:id', (req, res, next) => {
-  let productInst;
-  if(req.body.category){
+  let productInst
+  if (req.body.category) {
     Product.findById(req.params.id)
-    .then(product => product.update(req.body))
-    .then(product => {
-      productInst = product;
-      let categories = req.body.category.map(category => Category.findOrCreate({ where: { name: category }}))
-      return Promise.all(categories)
-    })
-    .then(categories => {
-      let catArray = categories.map(category => category[0])
-      productInst.setCategories(catArray)
-      return productInst
-    })
-    .then(product => res.send(product))
-    .catch()
-  }else{
+      .then(product => product.update(req.body))
+      .then(product => {
+        productInst = product
+        let categories = req.body.category.map(category =>
+          Category.findOrCreate({where: {name: category}})
+        )
+        return Promise.all(categories)
+      })
+      .then(categories => {
+        let catArray = categories.map(category => category[0])
+        productInst.setCategories(catArray)
+        return productInst
+      })
+      //attempt to return updated productInstance
+      //.then(() => Product.findById(req.params.id, { include: { model: Category } }))
+      .then(product => res.send(product))
+      .catch()
+  } else {
     Product.findById(req.params.id)
-    .then(product => product.update(req.body))
-    .then(product => res.send(product))
-    .catch()
+      .then(product => product.update(req.body))
+      .then(product => res.send(product))
+      .catch()
   }
-  
 })
