@@ -30,7 +30,8 @@ router.post('/', async (req, res, next) => {
   try {
     const newUser = await User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      isAdmin: req.body.isAdmin
     })
     res.status(201).send(newUser)
   } catch (err) {

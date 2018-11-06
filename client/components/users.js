@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchUsers, deleteUser} from '../store/users'
+import {fetchUsers, deleteUser, fetchAdmin} from '../store/users'
 
 class Users extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class Users extends Component {
     //   users: this.props.users
     // }
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleAdmin = this.handleAdmin.bind(this)
   }
 
   componentDidMount() {
@@ -19,6 +20,11 @@ class Users extends Component {
   handleRemove(event, userId) {
     event.preventDefault()
     this.props.deleteUser(userId)
+  }
+
+  handleAdmin(event, userId) {
+    console.log('USER ID', userId)
+    this.props.makeAdmin(userId)
   }
 
   render() {
@@ -35,6 +41,17 @@ class Users extends Component {
             >
               Remove
             </button>
+
+            <div className="form-group">
+              <label htmlFor="isAdmin"> Make admin </label>
+              <input
+                name="isAdmin"
+                type="radio"
+                className="input"
+                value="true"
+                onClick={event => this.handleAdmin(event, user.id)}
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -51,7 +68,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchUsers: () => dispatch(fetchUsers()),
-    deleteUser: userId => dispatch(deleteUser(userId))
+    deleteUser: userId => dispatch(deleteUser(userId)),
+    fetchAdmin: userId => dispatch(fetchAdmin(userId))
   }
 }
 

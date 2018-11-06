@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {postUser, updateUser} from '../store/users'
+import {postUser, makeAdmin} from '../store/users'
 import Users from './users'
 
 class UserManagement extends Component {
@@ -11,19 +11,23 @@ class UserManagement extends Component {
       password: '',
       isAdmin: false
     }
+    // DELETE HANDLE MAKE ADMIN
     this.handleMakeAdmin = this.handleMakeAdmin.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(event) {
-    if (event.target.isAdmin === 'true') {
-      console.log('ADMIN IS TRUE STRING')
+  async handleChange(event) {
+    if (event.target.name === 'isAdmin') {
+      console.log('IN ADMIN ', typeof event.target.value)
+      console.log('STATE', this.state)
+      // state is coming in with admin false - have to update it in method
+      await this.props.makeAdmin(this.state)
+    } else {
+      const property = event.target.name
+      let value = event.target.value
+      this.setState({[property]: value})
     }
-    const property = event.target.name
-    let value = event.target.value
-    console.log('is admin value IN HANDLE CHANGE', event.target.isAdmin)
-    this.setState({[property]: value})
   }
 
   handleMakeAdmin(event) {
@@ -32,8 +36,9 @@ class UserManagement extends Component {
       password: this.state.password,
       isAdmin: true
     }
-    //this.props.makeAdmin(user)
+    // this.props.makeAdmin(user)
   }
+
   async handleSubmit(event) {
     event.preventDefault()
     await this.props.postUser(this.state)
@@ -100,7 +105,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     postUser: user => dispatch(postUser(user)),
-    updateUser: user => dispatch(updateUser(user))
+    makeAdmin: user => dispatch(makeAdmin(user))
   }
 }
 
