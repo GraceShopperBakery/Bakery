@@ -6,27 +6,27 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     git: true,
     allowNull: false,
-    validate:{
+    validate: {
       notEmpty: true
     }
   },
   description: {
-    type: Sequelize.TEXT,
+    type: Sequelize.TEXT
   },
-  imageURL:{
+  imageURL: {
     type: Sequelize.TEXT,
     allowNull: false,
-    defaultValue: "https://goo.gl/uQaUUp"
+    defaultValue: 'https://goo.gl/uQaUUp'
   },
-  inventoryQuantity:{
+  inventoryQuantity: {
     type: Sequelize.INTEGER,
     defaultValue: 100
   },
   price: {
     type: Sequelize.FLOAT,
-    defaultValue: 3.99,
+    defaultValue: 3.99
   }
-});
+})
 
 // add class methods ? to count inventory, etc, or hook?
 // add virtual column (?) to get total cost
