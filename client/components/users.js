@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {fetchUsers, deleteUser, fetchAdmin} from '../store/users'
 
 class Users extends Component {
@@ -18,7 +17,6 @@ class Users extends Component {
     event.preventDefault()
     this.props.deleteUser(userId)
   }
-
   handleAdmin(event, userId) {
     this.props.fetchAdmin(userId)
   }
