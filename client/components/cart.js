@@ -80,16 +80,16 @@ class Cart extends Component {
                       <div id="quantityIncrease">
                       <button
                         type="button"
-                        onClick={() => this.handleIncreaseQty(product.title)}
+                        onClick={() => this.handleDecreaseQty(product.title)}
                       >
-                        +
+                        -
                       </button>
                       <li className="centertbody">{product.quantity}</li>
                       <button
                         type="button"
-                        onClick={() => this.handleDecreaseQty(product.title)}
+                        onClick={() => this.handleIncreaseQty(product.title)}
                       >
-                        -
+                        +
                       </button>
                       </div>
                     </td>
