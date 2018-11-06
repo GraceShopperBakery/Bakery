@@ -14,9 +14,10 @@ import {
   AdminHome,
   SingleProduct,
   AddProduct,
-  UpdateProduct,
+  UpdateProduct
 } from './components'
 import {me} from './store'
+import {fetchCart} from './store/cart'
 
 /**
  * COMPONENT
@@ -24,11 +25,11 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.fetchCart()
   }
 
   render() {
     const {isLoggedIn, isAdmin} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -69,7 +70,8 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    isAdmin: state.user.isAdmin
+    isAdmin: state.user.isAdmin,
+    cart: state.cart
   }
 }
 
@@ -77,6 +79,9 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+    },
+    fetchCart() {
+      dispatch(fetchCart())
     }
   }
 }

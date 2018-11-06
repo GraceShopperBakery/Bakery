@@ -1,18 +1,20 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {removeProduct, increaseQty, decreaseQty, prodTotal} from '../store/cart'
+
+import {addOrUpdateProduct, removeProduct, prodTotal} from '../store/cart'
+
 
 class Cart extends Component {
   constructor(props) {
     super(props)
     this.handleRemove = this.handleRemove.bind(this)
-    this.handleIncreaseQty = this.handleIncreaseQty.bind(this)
-    this.handleDecreaseQty = this.handleDecreaseQty.bind(this)
+    this.handleQtyChange = this.handleQtyChange.bind(this)
   }
 
-  handleRemove(productName) {
-    this.props.removeProduct(productName)
+  handleRemove(productId) {
+    this.props.removeProduct(productId)
+    
     if(prodTotal>0){
       document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
     }else{
@@ -20,22 +22,15 @@ class Cart extends Component {
     }
   }
 
-  handleIncreaseQty(productName) {
-    this.props.increaseQty(productName)
+  handleQtyChange(productId, newQty) {
+    if (newQty < 1) this.props.removeProduct(productId)
+    else this.props.updateProduct(productId, newQty)
+    
     document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
   }
 
-  handleDecreaseQty(productName) {
-    this.props.decreaseQty(productName)
-    if(prodTotal>0){
-      document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
-    }else{
-      document.getElementById('cart').innerHTML = `Cart`
-    }
-  }
-
   render() {
-    const cartProducts = Object.keys(this.props.cart)
+    const cartProducts = this.props.cart.products || []
     let total = 0
 
     if (cartProducts.length===0){
@@ -63,9 +58,9 @@ class Cart extends Component {
               </tr>
             </thead>
             <tbody>
-              {cartProducts.map(productName => {
-                const product = this.props.cart[productName]
-                total += product.price * product.quantity
+              {cartProducts.map(product => {
+                const orderQty = product.orderQty.quantity
+                total += product.price * orderQty
   
                 return (
                   <tr key={product.id}>
@@ -80,22 +75,22 @@ class Cart extends Component {
                       <div id="quantityIncrease">
                       <button
                         type="button"
-                        onClick={() => this.handleDecreaseQty(product.title)}
+                        onClick={() => this.handleQtyChange(product.id, orderQty - 1)}
                       >
                         -
                       </button>
-                      <li className="centertbody">{product.quantity}</li>
+                      <li className="centertbody">orderQty</li>
                       <button
                         type="button"
-                        onClick={() => this.handleIncreaseQty(product.title)}
+                        onClick={() => this.handleQtyChange(product.id, orderQty + 1)}
                       >
                         +
                       </button>
                       </div>
                     </td>
-                    <td className="centertbody">${(product.price * product.quantity).toFixed(2)}</td>
+                    <td className="centertbody">${(product.price * orderQty).toFixed(2)}</td>
                     <td className="centertbody" id="remove">
-                    <button type="button" onClick={() => this.handleRemove(product.title)}>
+                    <button type="button" onClick={() => this.handleRemove(product.id)}>
                       X
                     </button>
                     </td>
@@ -123,9 +118,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeProduct: productName => dispatch(removeProduct(productName)),
-    increaseQty: productName => dispatch(increaseQty(productName)),
-    decreaseQty: productName => dispatch(decreaseQty(productName))
+    removeProduct: productId => dispatch(removeProduct(productId)),
+    updateProduct: (productId, qty) =>
+      dispatch(addOrUpdateProduct(productId, qty))
   }
 }
 

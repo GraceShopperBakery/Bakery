@@ -1,21 +1,22 @@
 const Sequelize = require('sequelize')
-const db = require('../db');
-const Product = require('./products')
+const db = require('../db')
 
-const OrderQty = db.define('orderqty', {
+const OrderQty = db.define('orderQty', {
   quantity: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 1
   },
   priceWhenOrdered: {
-    type: Sequelize.FLOAT,
-  },
-  total: {
-    type: Sequelize.VIRTUAL,
-    get() {
-      return this.getDataValue('quantity') * this.getDataValue('priceWhenOrdered')
-    }
+    type: Sequelize.FLOAT
   }
-});
+  // total: {
+  //   type: Sequelize.FLOAT,
+  //   get() {
+  //     return (
+  //       this.getDataValue('quantity') * this.getDataValue('priceWhenOrdered')
+  //     )
+  //   }
+  // }
+})
 
 module.exports = OrderQty
