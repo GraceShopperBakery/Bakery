@@ -2,6 +2,7 @@ import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
 const Navbar = (props) => (
+
   <div id="NavBar">
     <div id="title">
       <h1>Hopper</h1>
@@ -13,7 +14,6 @@ const Navbar = (props) => (
       <Link to="/myAccount">My Account</Link>
       <Link to="/cart" id="cart">Cart</Link>  
     </nav>
-    {/* <hr /> */}
   </div>
 )
 

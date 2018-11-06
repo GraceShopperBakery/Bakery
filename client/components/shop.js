@@ -44,7 +44,11 @@ class Shop extends Component {
     event.preventDefault()
     this.props.addProduct(productId, Number(event.target.orderQty.value))
     event.target.orderQty.value = '1'
-    document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
+    if(prodTotal>0){
+      document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
+    }else{
+      document.getElementById('cart').innerHTML = `Cart`
+    }
   }
 
 
@@ -87,15 +91,15 @@ class Shop extends Component {
                     height="300px"
                   />
 
-                  <div className="checkout">
-                    <li>${(product.price).toFixed(2)}</li>
-                    <form
-                      onSubmit={event =>
-                        this.handleAddToCart(event, product.id)
-                      }
-                    >
+                  <div>
+                    <form className="checkout" onSubmit={event => this.handleAddToCart(event, product.id)}>
+                      <li>${(product.price).toFixed(2)}</li>
+                      <div className="quantity">
+                      <button  className='addToCart' type="submit" name={product.title}>
+                        Add To Cart
+                      </button>
                       <label>
-                        Quantity:&nbsp;
+                        Qty:&nbsp;
                         <select
                           className="qtyFilter"
                           label="Quantity"
@@ -108,9 +112,7 @@ class Shop extends Component {
                           ))}
                         </select>
                       </label>
-                      <button  className='addToCart' type="submit" name={product.title}>
-                        Add To Cart
-                      </button>
+                      </div>
                     </form>
                   </div>
                 </div>
