@@ -14,7 +14,7 @@ const SET_CART = 'SET_CART'
 
 const defaultCart = {}
 
-export let prodTotal = 0
+export let prodTotal;
 
 
 /**
@@ -35,6 +35,11 @@ export const fetchCart = () => async dispatch => {
   try {
     const response = await axios.get('/api/cart')
     const action = setCart(response.data)
+    prodTotal = response.data.products.reduce((total, product) => {
+      total+= product.orderQty.quantity
+      console.log('total', total)
+      return total
+    }, 0)
     dispatch(action)
   } catch (err) {
     console.log(err)
@@ -64,10 +69,8 @@ export const removeProduct = productId => async dispatch => {
 export default function(state = defaultCart, action) {
   switch (action.type) {
     case SET_CART:
-      prodTotal++
       return action.cart
     case REMOVE_PRODUCT:
-      prodTotal-={...state}[action.productName].quantity
       return {...state, products: [...state.products.filter(product => product.id !== action.productId)]}
     default:
       return state
