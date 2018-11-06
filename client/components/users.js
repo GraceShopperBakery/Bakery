@@ -16,7 +16,8 @@ class Users extends Component {
     this.props.fetchUsers()
   }
 
-  handleRemove(userId) {
+  handleRemove(event, userId) {
+    event.preventDefault()
     this.props.deleteUser(userId)
   }
 
@@ -28,7 +29,10 @@ class Users extends Component {
         {users.map(user => (
           <div key={user.id}>
             <h4>{user.email}</h4>
-            <button type="button" onClick={() => this.handleRemove(user.id)}>
+            <button
+              type="button"
+              onClick={event => this.handleRemove(event, user.id)}
+            >
               Remove
             </button>
           </div>
@@ -40,7 +44,7 @@ class Users extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users.users
+    users: state.users
   }
 }
 

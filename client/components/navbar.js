@@ -1,8 +1,7 @@
 import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
-
-const Navbar = (props) => (
+const Navbar = props => (
   <div>
     <h1>Grace's Cakes</h1>
     <nav>
@@ -11,7 +10,6 @@ const Navbar = (props) => (
       <Link to="/shop">Shop</Link>
       <Link to="/myAccount">My Account</Link>
       <Link to="/cart">Cart</Link>
-      
     </nav>
     <hr />
   </div>
@@ -19,4 +17,4 @@ const Navbar = (props) => (
 
 export default Navbar
 
-
+// add original biolerplate mapToState part

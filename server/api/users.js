@@ -26,9 +26,9 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    const newUser = User.create({
+    const newUser = await User.create({
       email: req.body.email,
       password: req.body.password
     })
@@ -38,14 +38,26 @@ router.post('/', (req, res, next) => {
   }
 })
 
-router.delete('/:userId', (req, res, next) => {
+router.delete('/:userId', async (req, res, next) => {
   try {
-    User.destroy({
+    await User.destroy({
       where: {
         id: req.params.userId
       }
     })
+    res.sendStatus(202)
   } catch (err) {
     next(err)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const userToUpdate = await User.findById(req.params.id)
+    const updatedUser = await userToUpdate.update({isAdmin: true})
+    res.status(201)
+    res.json(updatedUser)
+  } catch (err) {
+    next(console.log(err))
   }
 })

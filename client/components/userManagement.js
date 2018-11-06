@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {postUser, addUser, updateUser} from '../store/users'
+import {postUser, updateUser} from '../store/users'
 import Users from './users'
 
 class UserManagement extends Component {
@@ -11,24 +11,37 @@ class UserManagement extends Component {
       password: '',
       isAdmin: false
     }
+    this.handleMakeAdmin = this.handleMakeAdmin.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleMakeAdmin = this.handleMakeAdmin.bind(this)
   }
 
   handleChange(event) {
+    if (event.target.isAdmin === 'true') {
+      console.log('ADMIN IS TRUE STRING')
+    }
     const property = event.target.name
     let value = event.target.value
+    console.log('is admin value IN HANDLE CHANGE', event.target.isAdmin)
     this.setState({[property]: value})
   }
 
-  handleMakeAdmin() {
-    this.props.updateUser(user, id)
+  handleMakeAdmin(event) {
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+      isAdmin: true
+    }
+    //this.props.makeAdmin(user)
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
-    this.props.postUser(this.state)
-    this.props.addUser(this.state)
+    await this.props.postUser(this.state)
+    this.setState({
+      email: '',
+      password: ''
+      //isAdmin
+    })
   }
 
   render() {
@@ -52,9 +65,17 @@ class UserManagement extends Component {
               <input name="password" type="text" className="input" required />
             </div>
           </div>
-          <button type="button" onClick={this.handleMakeAdmin}>
-            Make admin
-          </button>
+          <div className="form-group">
+            <label htmlFor="isAdmin"> Make admin </label>
+            <input
+              name="isAdmin"
+              type="radio"
+              className="input"
+              value="true"
+              onClick={event => this.handleMakeAdmin(event)}
+            />
+          </div>
+
           <div className="required">
             All fields marked with a * are required.
           </div>
@@ -78,8 +99,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addUser: user => dispatch(addUser(user)),
-    postUser: user => dispatch(postUser(user))
+    postUser: user => dispatch(postUser(user)),
+    updateUser: user => dispatch(updateUser(user))
   }
 }
 
