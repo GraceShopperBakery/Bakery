@@ -5,7 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['id', 'email']
+      attributes: ['id', 'email', 'isAdmin']
     })
     res.json(users)
   } catch (err) {
@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
     const newUser = await User.create({
       email: req.body.email,
       password: req.body.password,
-      isAdmin: req.body.isAdmin
+      isAdmin: req.body.isAdmin || false
     })
     res.status(201).send(newUser)
   } catch (err) {

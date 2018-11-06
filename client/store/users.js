@@ -12,15 +12,14 @@ const initialState = []
 // ACTION CREATORS
 const getUsers = users => ({type: GET_USERS, users})
 export const addUser = user => ({type: ADD_USER, user})
-export const removeUser = userId => {
-  return {
-    type: REMOVE_USER,
-    userId
-  }
-}
-export const makeAdmin = userId => {
-  type: UPDATE_USER, user
-}
+export const removeUser = userId => ({
+  type: REMOVE_USER,
+  userId
+})
+export const makeAdmin = userId => ({
+  type: MAKE_ADMIN,
+  userId
+})
 
 // THUNK CREATORS
 
@@ -54,8 +53,9 @@ export const deleteUser = userId => async dispatch => {
 
 export const fetchAdmin = userId => async dispatch => {
   try {
-    const {data} = await axios.put(`/api/users/${userId}`)
-    dispatch(makeAdmin(data))
+    const response = await axios.put(`/api/users/${userId}`)
+    const action = makeAdmin(response.data)
+    dispatch(action)
   } catch (err) {
     console.log(err)
   }

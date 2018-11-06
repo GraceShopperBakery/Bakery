@@ -23,8 +23,7 @@ class Users extends Component {
   }
 
   handleAdmin(event, userId) {
-    console.log('USER ID', userId)
-    this.props.makeAdmin(userId)
+    this.props.fetchAdmin(userId)
   }
 
   render() {
@@ -41,8 +40,15 @@ class Users extends Component {
             >
               Remove
             </button>
+            <button
+              type="button"
+              name="isAdmin"
+              onClick={event => this.handleAdmin(event, user.id)}
+            >
+              Make Admin
+            </button>
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="isAdmin"> Make admin </label>
               <input
                 name="isAdmin"
@@ -51,7 +57,7 @@ class Users extends Component {
                 value="true"
                 onClick={event => this.handleAdmin(event, user.id)}
               />
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
