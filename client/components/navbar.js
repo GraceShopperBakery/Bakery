@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
-
 const Navbar = (props) => (
   <div id="NavBar">
     <div id="title">
@@ -19,5 +18,4 @@ const Navbar = (props) => (
 )
 
 export default Navbar
-
 

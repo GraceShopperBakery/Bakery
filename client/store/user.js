@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const ADMIN_ADD_USER = 'ADMIN_ADD_USER'
 
 /**
  * INITIAL STATE
@@ -40,10 +41,10 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    const user = res.data;
+    const user = res.data
     if (user.isAdmin) {
       history.push('/admin')
-    } else { 
+    } else {
       history.push('/home')
     }
   } catch (dispatchOrHistoryErr) {

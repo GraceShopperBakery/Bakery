@@ -14,7 +14,8 @@ import {
   AdminHome,
   SingleProduct,
   AddProduct,
-  UpdateProduct
+  UpdateProduct,
+  UserManagement
 } from './components'
 import {me} from './store'
 import {fetchCart} from './store/cart'
@@ -41,22 +42,26 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        {isAdmin && (
-          <Switch>
-            {/* Routes placed here are only available to admin after logging in */}
-            <Route exact path="/admin" component={AdminHome} />
-            <Route path="/admin/addProduct" component={AddProduct} />
-            <Route path="/admin/updateProduct" component={UpdateProduct} />
-          </Switch>
-        )}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+
             <Route path="/home" component={UserHome} />
+            {isAdmin && (
+              <Switch>
+                {/* Routes placed here are only available to admin after logging in */}
+
+                <Route path="/admin/addProduct" component={AddProduct} />
+                <Route path="/admin/updateProduct" component={UpdateProduct} />
+                <Route path="/admin/users" component={UserManagement} />
+                <Route path="/admin" component={AdminHome} />
+              </Switch>
+            )}
           </Switch>
         )}
+
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route path="/" component={Home} />
       </Switch>
     )
   }
