@@ -22,7 +22,6 @@ export const makeAdmin = userId => ({
 })
 
 // THUNK CREATORS
-
 export const fetchUsers = () => async dispatch => {
   try {
     const response = await axios.get('/api/users')
@@ -62,7 +61,6 @@ export const fetchAdmin = userId => async dispatch => {
 }
 
 // REDUCER
-
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_USERS:

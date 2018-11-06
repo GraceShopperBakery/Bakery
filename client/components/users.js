@@ -6,9 +6,6 @@ import {fetchUsers, deleteUser, fetchAdmin} from '../store/users'
 class Users extends Component {
   constructor(props) {
     super(props)
-    // this.state = {
-    //   users: this.props.users
-    // }
     this.handleRemove = this.handleRemove.bind(this)
     this.handleAdmin = this.handleAdmin.bind(this)
   }
@@ -47,17 +44,6 @@ class Users extends Component {
             >
               Make Admin
             </button>
-
-            {/* <div className="form-group">
-              <label htmlFor="isAdmin"> Make admin </label>
-              <input
-                name="isAdmin"
-                type="radio"
-                className="input"
-                value="true"
-                onClick={event => this.handleAdmin(event, user.id)}
-              />
-            </div> */}
           </div>
         ))}
       </div>

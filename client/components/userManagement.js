@@ -11,41 +11,28 @@ class UserManagement extends Component {
       password: '',
       isAdmin: false
     }
-    // DELETE HANDLE MAKE ADMIN
-    this.handleMakeAdmin = this.handleMakeAdmin.bind(this)
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async handleChange(event) {
+  handleChange(event) {
+    const property = event.target.name
+    let value = event.target.value
     if (event.target.name === 'isAdmin') {
-      console.log('IN ADMIN ', typeof event.target.value)
-      console.log('STATE', this.state)
-      // state is coming in with admin false - have to update it in method
-      await this.props.makeAdmin(this.state)
-    } else {
-      const property = event.target.name
-      let value = event.target.value
-      this.setState({[property]: value})
+      event.target.value = true
     }
-  }
-
-  handleMakeAdmin(event) {
-    const user = {
-      email: this.state.email,
-      password: this.state.password,
-      isAdmin: true
-    }
-    // this.props.makeAdmin(user)
+    this.setState({[property]: value})
   }
 
   async handleSubmit(event) {
     event.preventDefault()
     await this.props.postUser(this.state)
+    // to clear form:
     this.setState({
       email: '',
-      password: ''
-      //isAdmin
+      password: '',
+      isAdmin: false
     })
   }
 
@@ -72,13 +59,7 @@ class UserManagement extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="isAdmin"> Make admin </label>
-            <input
-              name="isAdmin"
-              type="radio"
-              className="input"
-              value="true"
-              onClick={event => this.handleMakeAdmin(event)}
-            />
+            <input name="isAdmin" type="radio" className="input" value="true" />
           </div>
 
           <div className="required">
@@ -104,8 +85,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postUser: user => dispatch(postUser(user)),
-    makeAdmin: user => dispatch(makeAdmin(user))
+    postUser: user => dispatch(postUser(user))
   }
 }
 

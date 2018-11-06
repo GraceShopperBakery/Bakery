@@ -18,7 +18,8 @@ router.get('/:userId', async (req, res, next) => {
     const user = await User.findOne({
       where: {
         id: req.params.userId
-      }
+      },
+      attributes: ['id', 'email', 'isAdmin']
     })
     res.json(user)
   } catch (err) {
