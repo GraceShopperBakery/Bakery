@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product} = require('../db/models')
+const {Order, Product, OrderQty} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -36,11 +36,8 @@ router.put('/', async (req, res, next) => {
     console.log('***req.body', req.body)
     const productId = req.body.productId
     const orderQty = req.body.orderQty
+
     const product = await Product.findById(productId)
-
-    //await product.setOrder(cart, {through: {quantity: orderQty}})
-
-    //TODO orderQty should default to 1
 
     await cart.addProduct(product, {through: {quantity: orderQty}})
 
@@ -50,7 +47,27 @@ router.put('/', async (req, res, next) => {
     //cart = await Order.findById(req.params.id, {
     //   include: {model: Product}
     // })
+    // cart = await Order.findById(req.session.cartId, {
+    //   include: {model: Product}
+    // })
+    // console.log('*** product returned from add product route*', product)
+    // let selectedProduct = cart.products.find(
+    //   productInCart => productInCart.id === product.id
+    // )
+    // console.log('**selected product**', selectedProduct)
+    //console.log('**Cart before sending it back from route', cart)
     res.send(product)
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    const productToDelete = await Product.findById(req.params.productId)
+    const cart = await Order.findById(req.session.cartId)
+    await cart.removeProduct(productToDelete)
+    res.send('product deleted')
   } catch (err) {
     console.log(err)
   }

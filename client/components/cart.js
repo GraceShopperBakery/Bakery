@@ -3,9 +3,9 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {
   addOrUpdateProduct,
-  removeProduct,
-  increaseQty,
-  decreaseQty
+  removeProduct
+  // increaseQty,
+  // decreaseQty
 } from '../store/cart'
 
 class Cart extends Component {
@@ -13,42 +13,42 @@ class Cart extends Component {
     super(props)
     this.handleRemove = this.handleRemove.bind(this)
     this.handleQtyChange = this.handleQtyChange.bind(this)
-    this.handleIncreaseQty = this.handleIncreaseQty.bind(this)
-    this.handleDecreaseQty = this.handleDecreaseQty.bind(this)
+    // this.handleIncreaseQty = this.handleIncreaseQty.bind(this)
+    // this.handleDecreaseQty = this.handleDecreaseQty.bind(this)
   }
 
-  handleRemove(productName) {
-    this.props.removeProduct(productName)
+  handleRemove(productId) {
+    this.props.removeProduct(productId)
   }
 
   handleQtyChange(productId, newQty) {
-    this.props.updateProduct(productId, newQty)
+    if (newQty < 1) this.props.removeProduct(productId)
+    else this.props.updateProduct(productId, newQty)
   }
 
-  handleAddToCart(event, productId) {
-    event.preventDefault()
-    this.props.addProduct(productId, Number(event.target.orderQty.value))
-    event.target.orderQty.value = '1'
-  }
+  // handleAddToCart(event, productId) {
+  //   event.preventDefault()
+  //   this.props.addProduct(productId, Number(event.target.orderQty.value))
+  //   event.target.orderQty.value = '1'
+  // }
 
-  handleIncreaseQty(productName) {
-    this.props.increaseQty(productName)
-  }
+  // handleIncreaseQty(productName) {
+  //   this.props.increaseQty(productName)
+  // }
 
-  handleDecreaseQty(productName) {
-    this.props.decreaseQty(productName)
-  }
+  // handleDecreaseQty(productName) {
+  //   this.props.decreaseQty(productName)
+  // }
 
   render() {
     const cartProducts = this.props.cart.products || []
     let total = 0
-    console.log('***cartProducts', cartProducts)
     return cartProducts.length < 1 ? (
       <div>Loading Cart</div>
     ) : (
       <div>
         {cartProducts.map(product => {
-          let orderQty = product.orderqty.quantity
+          let orderQty = product.orderQty.quantity
           total += product.price * orderQty
 
           return (
@@ -75,7 +75,7 @@ class Cart extends Component {
               <li>Subtotal: {(product.price * orderQty).toFixed(2)}</li>
               <button
                 type="button"
-                onClick={() => this.handleRemove(product.title)}
+                onClick={() => this.handleRemove(product.id)}
               >
                 Remove
               </button>
@@ -96,11 +96,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeProduct: productName => dispatch(removeProduct(productName)),
+    removeProduct: productId => dispatch(removeProduct(productId)),
     updateProduct: (productId, qty) =>
-      dispatch(addOrUpdateProduct(productId, qty)),
-    increaseQty: productName => dispatch(increaseQty(productName)),
-    decreaseQty: productName => dispatch(decreaseQty(productName))
+      dispatch(addOrUpdateProduct(productId, qty))
+    // increaseQty: productName => dispatch(increaseQty(productName)),
+    // decreaseQty: productName => dispatch(decreaseQty(productName))
   }
 }
 
