@@ -79,7 +79,7 @@ class Cart extends Component {
                       >
                         -
                       </button>
-                      <li className="centertbody">orderQty</li>
+                      <li className="centertbody">{orderQty}</li>
                       <button
                         type="button"
                         onClick={() => this.handleQtyChange(product.id, orderQty + 1)}
