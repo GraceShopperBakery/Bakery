@@ -1,8 +1,13 @@
 import React from 'react'
+import Toast from './Toast'
+// import {ToastContainer} from 'react-toastify'
 
 const Home = props => {
   return (
-    <h1>Welcome to our bakery!</h1>
+    <div>
+      <h1>Welcome to our bakery!</h1>
+      <Toast />
+    </div>
   )
 }
 
