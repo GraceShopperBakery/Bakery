@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, fetchCategories} from '../store/products'
-import {addOrUpdateProduct} from '../store/cart'
+
+import {addOrUpdateProduct, prodTotal} from '../store/cart'
+
 
 class Shop extends Component {
   constructor(props) {
@@ -42,7 +44,9 @@ class Shop extends Component {
     event.preventDefault()
     this.props.addProduct(productId, Number(event.target.orderQty.value))
     event.target.orderQty.value = '1'
+    document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
   }
+
 
   render() {
     let currentProduct = []
@@ -84,7 +88,7 @@ class Shop extends Component {
                   />
 
                   <div className="checkout">
-                    <li>${product.price.toFixed(2)}</li>
+                    <li>${(product.price).toFixed(2)}</li>
                     <form
                       onSubmit={event =>
                         this.handleAddToCart(event, product.id)
@@ -104,7 +108,7 @@ class Shop extends Component {
                           ))}
                         </select>
                       </label>
-                      <button type="submit" name={product.title}>
+                      <button  className='addToCart' type="submit" name={product.title}>
                         Add To Cart
                       </button>
                     </form>

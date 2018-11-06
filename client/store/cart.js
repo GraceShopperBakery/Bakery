@@ -5,27 +5,27 @@ import axios from 'axios'
  */
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
-// const INCREASE_QTY = 'INCREASE_QTY'
-// const DECREASE_QTY = 'DECREASE_QTY'
 const SET_CART = 'SET_CART'
-// const SET_PRODUCT = 'SET_PRODUCT'
+
 
 /**
  * INITIAL STATE
  */
+
 const defaultCart = {}
+
+export let prodTotal = 0
+
 
 /**
  * ACTION CREATORS
  */
-//const setProduct = product => ({type: SET_PRODUCT, product})
-// export const setNewProduct = product => ({type: ADD_PRODUCT, product})
+
 const deleteProduct = productId => ({
   type: REMOVE_PRODUCT,
   productId
 })
-// export const increaseQty = productName => ({type: INCREASE_QTY, productName})
-// export const decreaseQty = productName => ({type: DECREASE_QTY, productName})
+
 export const setCart = cart => ({type: SET_CART, cart})
 /**
  * THUNK CREATORS
@@ -64,41 +64,11 @@ export const removeProduct = productId => async dispatch => {
 export default function(state = defaultCart, action) {
   switch (action.type) {
     case SET_CART:
+      prodTotal++
       return action.cart
-    // case SET_PRODUCT:
-    //   return {...state, products: [...state.products, action.product]}
-    // case ADD_PRODUCT:
-    //   if (!state[action.product.title]) {
-    //     const newProduct = {...action.product}
-    //     newProduct.quantity = 1
-    //     return {...state, [newProduct.title]: newProduct}
-    //   } else {
-    //     const updatedProduct = {...state[action.product.title]}
-    //     updatedProduct.quantity++
-    //     return {...state, [action.product.title]: updatedProduct}
-    //   }
-    // case INCREASE_QTY:
-    //   const productToIncrease = {...state[action.productName]}
-    //   productToIncrease.quantity++
-    //   return {...state, [action.productName]: productToIncrease}
     case REMOVE_PRODUCT:
-      return {
-        ...state,
-        products: [
-          ...state.products.filter(product => product.id !== action.productId)
-        ]
-      }
-
-    // case DECREASE_QTY:
-    //   const productToDecrease = {...state[action.productName]}
-    //   if (productToDecrease.quantity > 1) {
-    //     productToDecrease.quantity--
-    //     return {...state, [action.productName]: productToDecrease}
-    //   } else {
-    //     const newCart = {...state}
-    //     delete newCart[action.productName]
-    //     return newCart
-    //   }
+      prodTotal-={...state}[action.productName].quantity
+      return {...state, products: [...state.products.filter(product => product.id !== action.productId)]}
     default:
       return state
   }

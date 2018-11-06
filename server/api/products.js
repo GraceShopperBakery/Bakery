@@ -46,8 +46,11 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', (req, res, next) => {
-  let productInst
+
+//const isAdminMW = (req, res, next) => req.user.isAdmin ? next() : res.send("FORBIDDEN")
+
+router.post('/',  (req, res, next) => {
+  let productInst;
   Product.create({
     title: req.body.title,
     description: req.body.description,

@@ -12,9 +12,9 @@ const Navbar = (props) => (
       <Link to="/about">About</Link>
       <Link to="/shop">Shop</Link>
       <Link to="/myAccount">My Account</Link>
-      <Link to="/cart">Cart</Link>  
+      <Link to="/cart" id="cart">Cart</Link>  
     </nav>
-    <hr />
+    {/* <hr /> */}
   </div>
 )
 
