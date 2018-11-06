@@ -8,6 +8,7 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const INCREASE_QTY = 'INCREASE_QTY'
 const DECREASE_QTY = 'DECREASE_QTY'
 const SET_CART = 'SET_CART'
+const SET_PRODUCT = 'SET_PRODUCT'
 
 /**
  * INITIAL STATE
@@ -17,7 +18,7 @@ const defaultCart = {}
 /**
  * ACTION CREATORS
  */
-
+const setProduct = product => ({type: SET_PRODUCT, product})
 export const setNewProduct = product => ({type: ADD_PRODUCT, product})
 export const removeProduct = productName => ({
   type: REMOVE_PRODUCT,
@@ -40,10 +41,10 @@ export const fetchCart = () => async dispatch => {
   }
 }
 
-export const addProduct = (productId, orderQty) => async dispatch => {
+export const addOrUpdateProduct = (productId, orderQty) => async dispatch => {
   try {
     const response = await axios.put(`/api/cart`, {productId, orderQty})
-    const action = setNewProduct(response.data)
+    const action = setProduct(response.data)
     dispatch(action)
   } catch (err) {
     console.log(err)
@@ -56,6 +57,8 @@ export default function(state = defaultCart, action) {
   switch (action.type) {
     case SET_CART:
       return action.cart
+    case SET_PRODUCT:
+      return {...state, products: [...state.products, action.product]}
     case ADD_PRODUCT:
       if (!state[action.product.title]) {
         const newProduct = {...action.product}

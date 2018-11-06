@@ -33,6 +33,7 @@ router.put('/', async (req, res, next) => {
     let cart = await Order.findById(req.session.cartId)
 
     //adding a product to cart
+    console.log('***req.body', req.body)
     const productId = req.body.productId
     const orderQty = req.body.orderQty
     const product = await Product.findById(productId)

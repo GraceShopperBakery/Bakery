@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, fetchCategories} from '../store/products'
-import {addProduct} from '../store/cart'
+import {addOrUpdateProduct} from '../store/cart'
 
 class Shop extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class Shop extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleClear = this.handleClear.bind(this)
     this.handleAddToCart = this.handleAddToCart.bind(this)
-    this.formRef = 1
 
     this.state = {
       filteredProducts: []
@@ -41,8 +40,7 @@ class Shop extends Component {
 
   handleAddToCart(event, productId) {
     event.preventDefault()
-    this.props.addProduct(productId, event.target.orderQty.value)
-    this.formRef.reset()
+    this.props.addProduct(productId, Number(event.target.orderQty.value))
     event.target.orderQty.value = '1'
   }
 
@@ -91,9 +89,6 @@ class Shop extends Component {
                       onSubmit={event =>
                         this.handleAddToCart(event, product.id)
                       }
-                      ref={ref => {
-                        this.formRef = ref
-                      }}
                     >
                       <label>
                         Quantity:&nbsp;
@@ -135,7 +130,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     fetchCategories: () => dispatch(fetchCategories()),
-    addProduct: productId => dispatch(addProduct(productId))
+    addProduct: (productId, qty) => dispatch(addOrUpdateProduct(productId, qty))
   }
 }
 
