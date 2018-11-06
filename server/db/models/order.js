@@ -24,14 +24,24 @@ const Order = db.define('order', {
 
 module.exports = Order
 
-Order.prototype.getTotal = async function() {
-  const totals = await OrderQty.findAll({
-    where: {
-      orderId: this.id
-    }
-  })
-  //console.log(totals, '******totals')
-}
+// TODO: complete instance methods below
+
+//Order.prototype.increasQty = async function () {
+//   const order = await Order.findAll({
+//     where: {
+//       orderId: this.id
+//     }
+//   })
+// }
+
+// Order.prototype.getTotal = async function() {
+//   const totals = await OrderQty.findAll({
+//     where: {
+//       orderId: this.id
+//     }
+//   })
+//   //console.log(totals, '******totals')
+// }
 // Order.beforeCreate(async function (instance) {
 //   const totals = await OrderQty.findAll({
 //     where: {

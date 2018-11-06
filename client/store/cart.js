@@ -33,7 +33,7 @@ export const setCart = cart => ({type: SET_CART, cart})
 export const fetchCart = () => async dispatch => {
   try {
     const response = await axios.get('/api/cart')
-    const action = setCart(response.data.products)
+    const action = setCart(response.data)
     dispatch(action)
   } catch (err) {
     console.log(err)

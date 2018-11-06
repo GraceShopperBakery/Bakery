@@ -127,9 +127,7 @@ class Shop extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    categories: state.products.categories,
-    cart: state.cart,
-    state: state
+    categories: state.products.categories
   }
 }
 

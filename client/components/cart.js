@@ -24,14 +24,13 @@ class Cart extends Component {
   }
 
   render() {
-    const cartProducts = this.props.cart.products
-    const total = 0
-
+    const cartProducts = this.props.cart.products || []
+    let total = 0
+    console.log('***cartProducts', cartProducts)
     return (
       <div>
-        {cartProducts.map(productName => {
-          const product = this.props.cart[productName]
-          total += product.price * product.quantity
+        {cartProducts.map(product => {
+          total += product.price * product.orderqty.quantity
 
           return (
             <div key={product.id}>
@@ -40,7 +39,7 @@ class Cart extends Component {
               </Link>
               <li>Price per unit: {product.price}</li>
               <div>
-                <li>Quantity: {product.quantity}</li>
+                <li>Quantity: {product.orderqty.quantity}</li>
                 <button
                   type="button"
                   onClick={() => this.handleIncreaseQty(product.title)}
@@ -54,7 +53,10 @@ class Cart extends Component {
                   -
                 </button>
               </div>
-              <li>Subtotal: {(product.price * product.quantity).toFixed(2)}</li>
+              <li>
+                Subtotal:{' '}
+                {(product.price * product.orderqty.quantity).toFixed(2)}
+              </li>
               <button
                 type="button"
                 onClick={() => this.handleRemove(product.title)}

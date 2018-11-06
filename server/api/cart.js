@@ -34,11 +34,14 @@ router.put('/', async (req, res, next) => {
 
     //adding a product to cart
     const productId = req.body.productId
+    const orderQty = req.body.orderQty
     const product = await Product.findById(productId)
+
+    //await product.setOrder(cart, {through: {quantity: orderQty}})
 
     //TODO orderQty should default to 1
 
-    await cart.addProduct(product)
+    await cart.addProduct(product, {through: {quantity: orderQty}})
 
     //increasing quantity on product
 
