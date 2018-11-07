@@ -15,7 +15,9 @@ class Navbar extends Component {
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/shop">Shop</Link>
-          <Link to="/myAccount">My Account</Link>
+          <Link to="/myAccount">
+            {this.props.isLoggedIn ? 'My Account' : 'Login / Sign up'}
+          </Link>
           <Link to="/cart" id="cart">
             {this.props.cartQty <= 0 ? 'Cart' : `Cart: ${this.props.cartQty}`}
           </Link>

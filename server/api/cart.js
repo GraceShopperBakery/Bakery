@@ -11,7 +11,6 @@ router.get('/', async (req, res, next) => {
     if (req.user) {
       const user = await User.findById(req.user.id)
       const [usersCart] = await user.getOrders({where: {isCart: true}})
-      console.log('usersCarts', usersCart)
       req.session.cartId = usersCart.id
     }
     let cart = await Order.findById(req.session.cartId, {
@@ -75,7 +74,6 @@ router.put('/payment', async (req, res, next) => {
     if (req.user) {
       const user = await User.findById(req.user.id)
       user.addCart(newCart)
-      console.log(req.session)
     }
     req.session.cartId = newCart.id
 
