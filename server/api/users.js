@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User, Product} = require('../db/models')
+const {isAdminMW} = require('./index.js')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -40,7 +41,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdminMW, async (req, res, next) => {
   try {
     const newUser = await User.create({
       email: req.body.email,
@@ -53,7 +54,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.delete('/:userId', async (req, res, next) => {
+router.delete('/:userId', isAdminMW, async (req, res, next) => {
   try {
     await User.destroy({
       where: {
@@ -66,7 +67,7 @@ router.delete('/:userId', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isAdminMW, async (req, res, next) => {
   try {
     const userToUpdate = await User.findById(req.params.id)
     const updatedUser = await userToUpdate.update({isAdmin: true})
