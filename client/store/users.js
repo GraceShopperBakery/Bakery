@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {toast} from 'react-toastify'
 
 // ACTION TYPES
 const GET_USERS = 'GET_USERS'
@@ -67,14 +66,12 @@ export default function(state = initialState, action) {
     case GET_USERS:
       return action.users
     case ADD_USER:
-      toast.info('✅ User successfully added')
       return [...state, action.user]
     case REMOVE_USER: {
       const index = state.findIndex(elem => elem.id === action.userId)
       return [...state.slice(0, index), ...state.slice(index + 1)]
     }
     case MAKE_ADMIN:
-      toast.info('✅  User promoted to admin')
       return {
         ...state,
         users: [...state.users, action.user]

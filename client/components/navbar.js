@@ -1,7 +1,5 @@
 import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
-import {ToastContainer, toast} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 const Navbar = props => (
   <div id="NavBar">
@@ -18,7 +16,6 @@ const Navbar = props => (
       <Link to="/cart" id="cart">
         Cart
       </Link>
-      <ToastContainer />
     </nav>
   </div>
 )
