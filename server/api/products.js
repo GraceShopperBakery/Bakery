@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Product, Category, Review} = require('../db/models')
+const {isAdminMW} = require('./index')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -58,9 +59,6 @@ router.get('/:productId/reviews', async (req, res, next) => {
     next(err)
   }
 })
-
-const isAdminMW = (req, res, next) =>
-  req.user.isAdmin ? next() : res.send('Access denied')
 
 router.post('/', isAdminMW, (req, res, next) => {
   let productInst

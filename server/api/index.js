@@ -1,5 +1,8 @@
 const router = require('express').Router()
-module.exports = router
+const isAdminMW = (req, res, next) =>
+  req.user && req.user.isAdmin ? next() : res.send('Access denied')
+
+module.exports = {router, isAdminMW}
 
 router.use('/products', require('./products'))
 router.use('/users', require('./users'))
