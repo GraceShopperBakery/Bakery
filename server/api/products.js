@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Category} = require('../db/models')
+const {Product, Category, Review} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -34,13 +34,27 @@ router.get('/categories', async (req,res,next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
-    const products = await Product.findOne({
+    const product = await Product.findOne({
       where:{
         id: req.params.productId
       },
-      include:{model: Category}
+      include:{model: Category},
     });
-    res.json(products)
+    res.json(product)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:productId/reviews', async (req, res, next) => {
+  try {
+    const product = await Product.findOne({
+      where:{
+        id: req.params.productId
+      },
+      include:{model: Review}
+    });
+    res.json(product)
   } catch (err) {
     next(err)
   }
@@ -70,10 +84,24 @@ router.post('/', (req, res, next) => {
     .catch()
 });
 
+router.post('/:productId/reviews', async (req, res, next) => {
+  try {
+    const review = await Review.create({
+      rating: req.body.rating,
+      content: req.body.content,
+      productId: +req.params.productId,
+      userId: req.user ? +req.user.id : null
+    })
+    res.status(201).send(review)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/:id', (req, res, next) => {
   let productInst;
   if(req.body.category){
-    Product.findById(req.params.id)
+    Product.findById(req.params.id, {include: {model: Category}}) 
     .then(product => product.update(req.body))
     .then(product => {
       productInst = product;
@@ -93,5 +121,4 @@ router.put('/:id', (req, res, next) => {
     .then(product => res.send(product))
     .catch()
   }
-  
 })
