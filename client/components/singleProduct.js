@@ -20,7 +20,8 @@ class SingleProduct extends Component {
         </div>
       :
         <div>
-          <figure className="product">
+          <div className="shop">
+          <figure>
             <div className="product-figure">
               <h3>{this.props.product.title}</h3>
             </div>
@@ -29,7 +30,9 @@ class SingleProduct extends Component {
           <div>
             <li>Price: ${this.props.product.price}</li>
             <p>{this.props.product.description}</p>
-          </div>
+            </div>
+          
+          
           <div className="product-reviews">
             <div><h3>Reviews</h3></div>
               <div>
@@ -47,6 +50,7 @@ class SingleProduct extends Component {
             </div>
           <div>
             <ReviewForm />
+          </div>
           </div>
         </div>
     )

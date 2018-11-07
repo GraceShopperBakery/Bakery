@@ -25,7 +25,6 @@ router.get('/categories', async (req,res,next) => {
         result.push(category)
       }
     })
-
     res.json(result)
   } catch(err){
     next(err)
