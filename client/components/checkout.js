@@ -31,7 +31,7 @@ class Checkout extends Component {
     return (
       <div>
         {this.props.isLoggedIn ? (
-          <div>
+          <div className="checkOutForm">
             <form className="form" onChange={this.handleChange}>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -106,7 +106,7 @@ class Checkout extends Component {
               </div>
             </form>
 
-            <div onClick={this.handleClick}>
+            <div className="stripe" onClick={this.handleClick}>
               <CheckoutForStripe
                 name={'Checkout with Stripe'}
                 description={'Payment'}
@@ -115,17 +115,7 @@ class Checkout extends Component {
             </div>
           </div>
         ) : (
-          <div>
-            <div>
-              <p>
-                If you would like to check out as a user please login or sign
-                up:
-              </p>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-            <p>Check out as guest:</p>
-
+          <div className="checkOutForm">
             <form className="form" onChange={this.handleChange}>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -200,11 +190,13 @@ class Checkout extends Component {
               </div>
             </form>
 
-            <CheckoutForStripe
-              name={'Checkout with Stripe'}
-              description={'Payment'}
-              amount={this.props.cart.finalTotal}
-            />
+            <div className="stripe" onClick={this.handleClick}>
+              <CheckoutForStripe
+                name={'Checkout with Stripe'}
+                description={'Payment'}
+                amount={this.props.cart.finalTotal}
+              />
+            </div>
           </div>
         )}
       </div>
