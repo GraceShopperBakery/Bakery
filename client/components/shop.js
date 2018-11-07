@@ -5,6 +5,7 @@ import {fetchProducts, fetchCategories} from '../store/products'
 
 import {addOrUpdateProduct} from '../store/cart'
 
+
 class Shop extends Component {
   constructor(props) {
     super(props)
@@ -39,6 +40,7 @@ class Shop extends Component {
     this.setState({filteredProducts: []})
   }
 
+
   handleAddToCart(event, productId, productPrice) {
     event.preventDefault()
     this.props.addProduct(
@@ -53,6 +55,7 @@ class Shop extends Component {
       document.getElementById('cart').innerHTML = `Cart`
     }
   }
+
 
   render() {
     let currentProduct = []

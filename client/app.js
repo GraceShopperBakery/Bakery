@@ -1,16 +1,21 @@
 import React from 'react'
 import {Navbar} from './components'
 import Routes from './routes'
-// import {ToastContainer, toast} from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+import {
+  BrowserRouter as Router,
+  Link,
+  BrowserRouter,
+  Route
+} from 'react-router-dom'
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Routes />
-      {/* <ToastContainer /> */}
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Routes />
+      </div>
+    </Router>
   )
 }
 

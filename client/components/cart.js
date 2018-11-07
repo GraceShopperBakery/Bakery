@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
+
 import {addOrUpdateProduct, removeProduct} from '../store/cart'
+
 
 class Cart extends Component {
   constructor(props) {
@@ -28,6 +30,7 @@ class Cart extends Component {
     if (this.props.cart.qty > 0) {
       document.getElementById('cart').innerHTML = `Cart: ${this.props.cart.qty}`
     } else {
+
       document.getElementById('cart').innerHTML = `Cart`
     }
   }
@@ -67,7 +70,6 @@ class Cart extends Component {
                 {cartProducts.map(product => {
                   const orderQty = product.orderQty.quantity
                   total += product.price * orderQty
-
                   return (
                     <tr key={product.id}>
                       <td>
@@ -152,8 +154,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     removeProduct: productId => dispatch(removeProduct(productId)),
+
     updateProduct: (productId, qty, price) =>
       dispatch(addOrUpdateProduct(productId, qty, price))
+
   }
 }
 
