@@ -47,11 +47,6 @@ class Shop extends Component {
       productPrice
     )
     event.target.orderQty.value = '1'
-    if (this.props.cart.qty > 0) {
-      document.getElementById('cart').innerHTML = `Cart: ${this.props.cart.qty}`
-    } else {
-      document.getElementById('cart').innerHTML = `Cart`
-    }
   }
 
   render() {
@@ -139,8 +134,7 @@ class Shop extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    categories: state.products.categories,
-    cart: state.cart
+    categories: state.products.categories
   }
 }
 

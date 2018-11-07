@@ -11,25 +11,13 @@ class Cart extends Component {
     this.handleQtyChange = this.handleQtyChange.bind(this)
   }
 
-  handleRemove(productId) {
-    this.props.removeProduct(productId)
-
-    if (this.props.cart.qty > 0) {
-      document.getElementById('cart').innerHTML = `Cart: ${this.props.cart.qty}`
-    } else {
-      document.getElementById('cart').innerHTML = `Cart`
-    }
+  handleRemove(productId, qtyToRemove) {
+    this.props.removeProduct(productId, qtyToRemove)
   }
 
-  handleQtyChange(productId, newQty, price) {
-    if (newQty < 1) this.props.removeProduct(productId)
+  handleQtyChange(productId, newQty, price, qtyToRemove) {
+    if (newQty < 1) this.props.removeProduct(productId, qtyToRemove)
     else this.props.updateProduct(productId, newQty, price)
-
-    if (this.props.cart.qty > 0) {
-      document.getElementById('cart').innerHTML = `Cart: ${this.props.cart.qty}`
-    } else {
-      document.getElementById('cart').innerHTML = `Cart`
-    }
   }
 
   render() {
@@ -93,7 +81,8 @@ class Cart extends Component {
                               this.handleQtyChange(
                                 product.id,
                                 orderQty - 1,
-                                product.price
+                                product.price,
+                                orderQty
                               )
                             }
                           >
@@ -120,7 +109,9 @@ class Cart extends Component {
                       <td className="centertbody" id="remove">
                         <button
                           type="button"
-                          onClick={() => this.handleRemove(product.id)}
+                          onClick={() =>
+                            this.handleRemove(product.id, orderQty)
+                          }
                         >
                           X
                         </button>
@@ -151,7 +142,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeProduct: productId => dispatch(removeProduct(productId)),
+    removeProduct: (productId, qtyToRemove) =>
+      dispatch(removeProduct(productId, qtyToRemove)),
     updateProduct: (productId, qty, price) =>
       dispatch(addOrUpdateProduct(productId, qty, price))
   }
