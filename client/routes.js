@@ -15,7 +15,9 @@ import {
   SingleProduct,
   AddProduct,
   UpdateProduct,
-  UserManagement
+  UserManagement,
+  Checkout,
+  OrderSuccess
 } from './components'
 import {me} from './store'
 import {fetchCart} from './store/cart'
@@ -42,6 +44,8 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/orderSuccess" component={OrderSuccess} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

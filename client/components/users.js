@@ -36,13 +36,15 @@ class Users extends Component {
             >
               Remove
             </button>
-            <button
-              type="button"
-              name="isAdmin"
-              onClick={event => this.handleAdmin(event, user.id)}
-            >
-              Make Admin
-            </button>
+            {user.isAdmin ? null : (
+              <button
+                type="button"
+                name="isAdmin"
+                onClick={event => this.handleAdmin(event, user.id)}
+              >
+                Make Admin
+              </button>
+            )}
           </div>
         ))}
       </div>

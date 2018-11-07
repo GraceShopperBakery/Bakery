@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, fetchCategories} from '../store/products'
 
-import {addOrUpdateProduct, prodTotal} from '../store/cart'
+import {addOrUpdateProduct} from '../store/cart'
 
 
 class Shop extends Component {
@@ -40,13 +40,18 @@ class Shop extends Component {
     this.setState({filteredProducts: []})
   }
 
-  handleAddToCart(event, productId) {
+
+  handleAddToCart(event, productId, productPrice) {
     event.preventDefault()
-    this.props.addProduct(productId, Number(event.target.orderQty.value))
+    this.props.addProduct(
+      productId,
+      Number(event.target.orderQty.value),
+      productPrice
+    )
     event.target.orderQty.value = '1'
-    if(prodTotal>0){
-      document.getElementById('cart').innerHTML = `Cart: ${prodTotal}`
-    }else{
+    if (this.props.cart.qty > 0) {
+      document.getElementById('cart').innerHTML = `Cart: ${this.props.cart.qty}`
+    } else {
       document.getElementById('cart').innerHTML = `Cart`
     }
   }
@@ -92,26 +97,35 @@ class Shop extends Component {
                   />
 
                   <div>
-                    <form className="checkout" onSubmit={event => this.handleAddToCart(event, product.id)}>
-                      <li>${(product.price).toFixed(2)}</li>
+                    <form
+                      className="checkout"
+                      onSubmit={event =>
+                        this.handleAddToCart(event, product.id, product.price)
+                      }
+                    >
+                      <li>${product.price.toFixed(2)}</li>
                       <div className="quantity">
-                      <button  className='addToCart' type="submit" name={product.title}>
-                        Add To Cart
-                      </button>
-                      <label>
-                        Qty:&nbsp;
-                        <select
-                          className="qtyFilter"
-                          label="Quantity"
-                          name="orderQty"
+                        <button
+                          className="addToCart"
+                          type="submit"
+                          name={product.title}
                         >
-                          {availableOrderQty.map(num => (
-                            <option key={num} value={num}>
-                              {num}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
+                          Add To Cart
+                        </button>
+                        <label>
+                          Qty:&nbsp;
+                          <select
+                            className="qtyFilter"
+                            label="Quantity"
+                            name="orderQty"
+                          >
+                            {availableOrderQty.map(num => (
+                              <option key={num} value={num}>
+                                {num}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
                       </div>
                     </form>
                   </div>
@@ -128,7 +142,8 @@ class Shop extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    categories: state.products.categories
+    categories: state.products.categories,
+    cart: state.cart
   }
 }
 
@@ -136,7 +151,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     fetchCategories: () => dispatch(fetchCategories()),
-    addProduct: (productId, qty) => dispatch(addOrUpdateProduct(productId, qty))
+    addProduct: (productId, qty, price) =>
+      dispatch(addOrUpdateProduct(productId, qty, price))
   }
 }
 

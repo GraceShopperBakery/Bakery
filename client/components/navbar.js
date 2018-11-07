@@ -6,7 +6,9 @@ import 'react-toastify/dist/ReactToastify.css'
 const Navbar = props => (
   <div id="NavBar">
     <div id="title">
-      <h1>Hopper</h1>
+      <Link to="/">
+        <h1>Hopper</h1>
+      </Link>
     </div>
     <nav id="links">
       <Link to="/">Home</Link>

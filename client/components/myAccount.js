@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {logout} from '../store'
 import {Link, Redirect} from 'react-router-dom'
 import AuthForm, {Login, Signup} from './auth-form'
+import {fetchCart} from '../store/cart'
+
 
 const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
   return (
@@ -62,7 +64,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(logout())
+      dispatch(logout()).then(() => dispatch(fetchCart()))
     }
   }
 }
