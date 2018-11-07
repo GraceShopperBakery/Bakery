@@ -16,7 +16,7 @@ router.post('/login', async (req, res, next) => {
 
       if (!usersCart) {
         const sessionCart = await Order.findById(req.session.cartId)
-        await User.addCart(sessionCart)
+        await user.addOrder(sessionCart)
       }
 
       req.login(user, err => (err ? next(err) : res.json(user)))

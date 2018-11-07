@@ -57,6 +57,35 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+router.put('/payment', async (req, res, next) => {
+  try {
+    let order = await Order.findById(req.session.cartId)
+    const finalTotal = await order.getTotal()
+    order.update({
+      isCart: false,
+      email: req.body.email,
+      addressline1: req.body.addressLine1,
+      addressline2: req.body.addressLine2,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip,
+      finalTotal: finalTotal
+    })
+    let newCart = await Order.create()
+    if (req.user) {
+      const user = await User.findById(req.user.id)
+      user.addCart(newCart)
+      console.log(req.session)
+    }
+    req.session.cartId = newCart.id
+
+    //decrease inventoryQty of product
+    res.send(order)
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 router.delete('/:productId', async (req, res, next) => {
   try {
     const productToDelete = await Product.findById(req.params.productId)

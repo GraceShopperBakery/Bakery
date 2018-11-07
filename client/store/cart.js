@@ -37,6 +37,16 @@ export const fetchCart = () => async dispatch => {
   }
 }
 
+export const updateCart = formData => async dispatch => {
+  try {
+    await axios.put('/api/cart/payment', formData)
+    const action = setCart(defaultCart)
+    dispatch(action)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const addOrUpdateProduct = (
   productId,
   orderQty,
