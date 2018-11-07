@@ -133,7 +133,6 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     adminUpdateProduct: (id, product) => dispatch(updateProduct(id, product))
-
   }
 }
 
