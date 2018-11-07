@@ -34,11 +34,6 @@ const AdminHome = props => {
           <td>View current and past orders</td>
         </thead>
       </table>
-
-      {/* <Link to="/admin/addProduct">Products - Add Product</Link> */}
-      {/* <Link to="/admin/updateProduct">Products - Update Product</Link> */}
-      {/* <Link to="/admin/users">User Management</Link> */}
-      {/* <Link to="/admin/orders">Order Management</Link> */}
       <a href="#" onClick={props.handleClick}>
         Logout
       </a>

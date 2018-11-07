@@ -554,11 +554,6 @@ nav a {
 
 /* myAccount component */
 
-/* #myAccount {
-  display: flex;
-  justify-content: left;
-  text-align: left;
-} */
 #myAccount {
   display: flex;
   flex-wrap: wrap;
@@ -566,6 +561,48 @@ nav a {
   align-items: flex-start;
   justify-content: space-evenly;
   justify-items: flex-start;
-  padding-top: 0;
-  margin-top: 0;
+  padding-top: 30px;
+  margin-top: 10px;
+  font-size: 1.3em;
+}
+
+#authForm {
+  align-content: center;
+  color: #db6097;
+  width: 100%;
+  font-weight: bold;
+  position: sticky;
+  top: 20%;
+  font-size: 25px;
+  background-color: #fff8ea;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+#auth-form-control input {
+  border-radius: 10px;
+  width: 80%;
+  padding: 15px;
+  border-color: white;
+  margin-top: 15px;
+}
+
+#authbtn button {
+  background-color: white;
+  border-radius: 15px;
+  padding: 15px;
+
+  margin: 25px;
+  margin-left: 0px;
+  color: #db6097;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  align-content: left;
+}
+
+#googlebtn a {
+  color: #c2a46e;
+  font-size: 20px;
+  padding: 15px;
 }

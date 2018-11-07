@@ -25,10 +25,10 @@ const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
           <div id="myAccount">
             <tbody>
               <tr>
-                <h3>First time hare ... I mean here?</h3>
+                <h3>First time hare... I mean here?</h3>
               </tr>
               <td>
-                <Login />
+                <Signup />
               </td>
             </tbody>
 
@@ -37,7 +37,7 @@ const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
                 <h3>Already have an account?</h3>
               </tr>
               <td>
-                <Signup />
+                <Login />
               </td>
             </tbody>
           </div>
