@@ -37,7 +37,6 @@ export const fetchCart = () => async dispatch => {
   }
 }
 
-
 export const updateCart = formData => async dispatch => {
   try {
     await axios.put('/api/cart/payment', formData)

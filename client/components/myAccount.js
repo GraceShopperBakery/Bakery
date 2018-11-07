@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
 import {Link, Redirect} from 'react-router-dom'
-import AuthForm, {Login, Signup} from './auth-form'
 import {fetchCart} from '../store/cart'
-
 
 const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
   return (
@@ -24,34 +22,13 @@ const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
         </div>
       ) : (
         <div>
-          <div id="myAccount">
-            <tbody>
-              <tr>
-                <h3>First time hare... I mean here?</h3>
-              </tr>
-              <td>
-                <Signup />
-              </td>
-            </tbody>
-
-            <tbody>
-              <tr>
-                <h3>Already have an account?</h3>
-              </tr>
-              <td>
-                <Login />
-              </td>
-            </tbody>
-          </div>
+          {/* The navbar will show these links before you log in */}
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
         </div>
       )}
     </div>
   )
-}
-
-{
-  /* <Link to="/signup">Sign Up</Link>
-<Link to="/login">Login</Link> */
 }
 
 const mapState = state => {
