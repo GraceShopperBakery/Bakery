@@ -16,9 +16,10 @@ const defaultCart = {}
  * ACTION CREATORS
  */
 
-const deleteProduct = productId => ({
+const deleteProduct = (productId, qtyToRemove) => ({
   type: REMOVE_PRODUCT,
-  productId
+  productId,
+  qtyToRemove
 })
 
 export const setCart = cart => ({type: SET_CART, cart})
@@ -60,10 +61,10 @@ export const addOrUpdateProduct = (
   }
 }
 
-export const removeProduct = productId => async dispatch => {
+export const removeProduct = (productId, qtyToRemove) => async dispatch => {
   try {
     await axios.delete(`/api/cart/${productId}`)
-    dispatch(deleteProduct(productId))
+    dispatch(deleteProduct(productId, qtyToRemove))
   } catch (err) {
     console.log(err)
   }
@@ -78,6 +79,7 @@ export default function(state = defaultCart, action) {
     case REMOVE_PRODUCT:
       return {
         ...state,
+        qty: state.qty - action.qtyToRemove,
         products: [
           ...state.products.filter(product => product.id !== action.productId)
         ]
