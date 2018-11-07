@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
-import {fetchProduct} from '../store/products'
+import { fetchProduct, fetchProductReviews } from '../store/products'
+import ReviewForm from './reviewForm'
 
 class SingleProduct extends Component { 
 
   componentDidMount () {
     let id = this.props.match.params.productId
     this.props.fetchProduct(id)
+    this.props.fetchProductReviews(id)
   }
   
-  render() { 
+  render() {
+    const reviews = this.props.reviews
     return (
       this.props.product === {} ?
         <div id="invalid">
@@ -18,7 +20,8 @@ class SingleProduct extends Component {
         </div>
       :
         <div>
-          <figure className="product">
+          <div className="shop">
+          <figure>
             <div className="product-figure">
               <h3>{this.props.product.title}</h3>
             </div>
@@ -27,6 +30,27 @@ class SingleProduct extends Component {
           <div>
             <li>Price: ${this.props.product.price}</li>
             <p>{this.props.product.description}</p>
+            </div>
+          
+          
+          <div className="product-reviews">
+            <div><h3>Reviews</h3></div>
+              <div>
+                {
+                  reviews && reviews.length > 0 ? reviews.map(review => (
+                    (
+                      <p key={review.id}>
+                        {review.content}
+                      </p>
+                    )
+                  )) : 'There are currently no reviews posted.'
+                }
+              </div>
+            
+            </div>
+          <div>
+            <ReviewForm />
+          </div>
           </div>
         </div>
     )
@@ -36,12 +60,14 @@ class SingleProduct extends Component {
 const mapStateToProps = state => {
   return {
     product: state.products.product,
+    reviews: state.products.reviews.reviews
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchProduct: (id) => dispatch(fetchProduct(id)),
+    fetchProductReviews: (id) => dispatch(fetchProductReviews(id))
   }
 }
 

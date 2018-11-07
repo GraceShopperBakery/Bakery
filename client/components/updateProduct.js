@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateProduct, fetchProducts } from '../store/products'
+import { updateProduct, fetchProducts, fetchProduct, fetchCategories } from '../store/products'
 
-
-
+const initialState = {
+  title: "",
+  description: "",
+  imageURL: "",
+  category: [],
+  price: "",
+  inventoryQuantity: "",
+}
 class UpdateProduct extends Component { 
   constructor(props) { 
     super(props)
-    this.state = {
-      title: "",
-      description: "",
-      imageURL: "",
-      category: [],
-      price: "",
-      inventoryQuantity: ""
-    }
+    this.state = initialState;
+
     this.id = 0;
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -40,32 +40,39 @@ class UpdateProduct extends Component {
     this.setState({
       [property]: updateVal
     });
-    console.log(this.state)
   }
 
-  handleSubmit(evt) { 
+  async handleSubmit(evt) { 
     evt.preventDefault()
     const updatedProduct = {};
-    if (this.state.title) { updatedProduct.title= this.state.title }
+    if (this.state.title) { updatedProduct.title = this.state.title }
     if (this.state.description) { updatedProduct.description = this.state.description }
     if (this.state.imageURL) { updatedProduct.imageURL = this.state.imageURL }
-    if (this.state.category.length>1) { updatedProduct.category = this.state.category }
+    if (this.state.category.length > 1) { updatedProduct.category = this.state.category }
     if (this.state.price) { updatedProduct.price = this.state.price }
     if (this.state.inventoryQuantity) { updatedProduct.inventoryQuantity = this.state.inventoryQuantity }
-    console.log('UPDATED', updatedProduct)
-
-    //this.props.updateProduct(this.props.id, updatedProduct)
-    //this.setState(this.state)
-    console.log('ID', this.id)
-    this.props.adminUpdateProduct(this.id,updatedProduct)
+    
+    this.props.adminUpdateProduct(this.id, updatedProduct)
+    await this.setState({
+      title: "",
+      description: "",
+      imageURL: "",
+      category: [],
+      price: "",
+      inventoryQuantity: "",
+    })
+    console.log('State after cleared', this.state)
   }
 
   handleSelect(evt){
-    console.log(evt.target.value)
     this.id = evt.target.value
+    this.props.fetchProduct(this.id)
   }
 
-  render() { 
+  render() {
+    // console.log('PROPS', this.props)
+    const categories = Object.keys(this.props.product).length > 0 ? this.props.product.categories.map(category => category.name).join(', ') : ''
+
     return (
       <div>
       <form className="form"  onSubmit={this.handleSubmit}>
@@ -78,6 +85,20 @@ class UpdateProduct extends Component {
             <option value={product.id} key={product.id}>{product.title}</option>
           )}
           </select>
+          <div>
+          {this.id ? (
+            <div>
+              <div>
+                <h3>{this.props.product.title}</h3>
+              </div>
+              <img src={this.props.product.imageURL}   width="200px" height="200px" />
+              <li>Price: ${this.props.product.price}</li>
+              <li>Description: {this.props.product.description}</li>
+              <li>Categories: {categories}</li>
+              <li>Inventory Qty: {this.props.product.inventoryQuantity}</li>
+            </div>
+          ) : null}
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="title" >Name</label>
@@ -88,7 +109,7 @@ class UpdateProduct extends Component {
         <div className="form-group">
           <label htmlFor="description" >Description</label>
           <div className="form-control">
-            <textarea onChange={this.handleChange} name="description" type="text" className="input" />
+            <textarea onChange={this.handleChange} name="description" type="text" className="input" value={this.state.description} />
           </div>
         </div>
         <div className="form-group">
@@ -126,12 +147,15 @@ class UpdateProduct extends Component {
 
 const maptStateToProps = state => {
   return {
-    products: state.products.products
+    products: state.products.products,
+    product: state.products.product,
+    // categories: state.products.categories
   }
 }
 const mapDispatchToProps = dispatch => { 
   return {
     fetchProducts: () => dispatch(fetchProducts()),
+    fetchProduct: (id) => dispatch(fetchProduct(id)),
     adminUpdateProduct: (id, product) => dispatch(updateProduct(id, product))
   }
 }

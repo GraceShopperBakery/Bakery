@@ -556,3 +556,40 @@ nav a {
   outline: none;
   border: none;
 }
+
+/* Review Form Component */
+
+.shop .addReviewForm{
+  flex-direction: row;
+  display: flex
+}
+.addReviewForm{
+  align-content: center;
+  align-content: flex-start;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.single-figure {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.shop img {
+  display: block;
+  margin: auto;
+
+}
+
+.addReviewForm input {
+  width: 100%;
+  height: 1.5em;
+  font-size: 100%;
+  color:  rgb(183, 183, 183);
+}
