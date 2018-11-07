@@ -41,12 +41,17 @@ class Shop extends Component {
 
   handleAddToCart(event, productId, productPrice) {
     event.preventDefault()
-    this.props.addProduct(
-      productId,
-      Number(event.target.orderQty.value),
-      productPrice
-    )
-    event.target.orderQty.value = '1'
+    if (event.target.orderQty.value) {
+      let productOrderQty = Number(event.target.orderQty.value)
+      let productInCart = this.props.cart.products.find(
+        product => product.id == productId
+      )
+      if (productInCart) {
+        productOrderQty += productInCart.orderQty.quantity
+      }
+      this.props.addProduct(productId, productOrderQty, productPrice)
+      event.target.orderQty.value = null
+    }
   }
 
   render() {
@@ -111,6 +116,7 @@ class Shop extends Component {
                             label="Quantity"
                             name="orderQty"
                           >
+                            <option value={null} />
                             {availableOrderQty.map(num => (
                               <option key={num} value={num}>
                                 {num}
@@ -134,7 +140,8 @@ class Shop extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    categories: state.products.categories
+    categories: state.products.categories,
+    cart: state.cart
   }
 }
 
