@@ -27,7 +27,7 @@ class ReviewForm extends Component {
       content: "",
     })
   }
-
+  
   render() {
     return (
       <div className='addReviewForm'>
