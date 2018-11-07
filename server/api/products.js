@@ -34,11 +34,11 @@ router.get('/categories', async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findOne({
-      where:{
+      where: {
         id: req.params.productId
       },
-      include:{model: Category},
-    });
+      include: {model: Category}
+    })
     res.json(product)
   } catch (err) {
     next(err)
@@ -48,22 +48,22 @@ router.get('/:productId', async (req, res, next) => {
 router.get('/:productId/reviews', async (req, res, next) => {
   try {
     const product = await Product.findOne({
-      where:{
+      where: {
         id: req.params.productId
       },
-      include:{model: Review}
-    });
+      include: {model: Review}
+    })
     res.json(product)
   } catch (err) {
     next(err)
   }
 })
 
+const isAdminMW = (req, res, next) =>
+  req.user.isAdmin ? next() : res.send('Access denied')
 
-//const isAdminMW = (req, res, next) => req.user.isAdmin ? next() : res.send("FORBIDDEN")
-
-router.post('/',  (req, res, next) => {
-  let productInst;
+router.post('/', isAdminMW, (req, res, next) => {
+  let productInst
   Product.create({
     title: req.body.title,
     description: req.body.description,
@@ -101,24 +101,26 @@ router.post('/:productId/reviews', async (req, res, next) => {
   }
 })
 
-router.put('/:id', (req, res, next) => {
-  let productInst;
+router.put('/:id', isAdminMW, (req, res, next) => {
+  let productInst
   if (req.body.category) {
-    Product.findById(req.params.id, {include: {model: Category}}) 
-    .then(product => product.update(req.body))
-    .then(product => {
-      productInst = product;
-      let categories = req.body.category.map(category => Category.findOrCreate({ where: { name: category }}))
-      return Promise.all(categories)
-    })
-    .then(categories => {
-      let catArray = categories.map(category => category[0])
-      productInst.setCategories(catArray)
-      return productInst
-    })
-    .then(product => res.send(product))
-    .catch()
-  }else{
+    Product.findById(req.params.id, {include: {model: Category}})
+      .then(product => product.update(req.body))
+      .then(product => {
+        productInst = product
+        let categories = req.body.category.map(category =>
+          Category.findOrCreate({where: {name: category}})
+        )
+        return Promise.all(categories)
+      })
+      .then(categories => {
+        let catArray = categories.map(category => category[0])
+        productInst.setCategories(catArray)
+        return productInst
+      })
+      .then(product => res.send(product))
+      .catch()
+  } else {
     Product.findById(req.params.id)
       .then(product => product.update(req.body))
       .then(product => res.send(product))
