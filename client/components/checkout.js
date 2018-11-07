@@ -41,6 +41,7 @@ class Checkout extends Component {
                     type="email"
                     className="input"
                     value={this.state.email}
+                    required
                   />
                 </div>
               </div>
@@ -137,6 +138,7 @@ class Checkout extends Component {
                     type="text"
                     className="input"
                     value={this.state.addressLine1}
+                    required
                   />
                 </div>
               </div>
