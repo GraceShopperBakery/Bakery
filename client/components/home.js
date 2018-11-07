@@ -4,7 +4,6 @@ import SlideShow from 'react-image-show';
 
 
 const Home = props => {
-
   return (
     <div id="slideshow">
     <SlideShow
@@ -17,7 +16,6 @@ const Home = props => {
     />
     </div>
   )
-
 }
 
 export default Home
