@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { logout } from '../store'
+import {connect} from 'react-redux'
+import {logout} from '../store'
+import {fetchCart} from '../store/cart'
 
 /**
  * COMPONENT
@@ -14,9 +15,9 @@ export const UserHome = props => {
       <h3>Welcome, {email}</h3>
 
       <div>
-      <a href="#" onClick={props.handleClick}>
-        Logout
-      </a>
+        <a href="#" onClick={props.handleClick}>
+          Logout
+        </a>
       </div>
     </div>
   )
@@ -33,7 +34,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     handleClick() {
-      dispatch(logout())
+      dispatch(logout()).then(() => dispatch(fetchCart()))
     }
   }
 }
