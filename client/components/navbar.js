@@ -1,21 +1,23 @@
 import React from 'react'
 import {Link, Redirect} from 'react-router-dom'
 
-const Navbar = (props) => (
-
+const Navbar = props => (
   <div id="NavBar">
     <div id="title">
-      <h1>Hopper</h1>
+      <Link to="/">
+        <h1>Hopper</h1>
+      </Link>
     </div>
     <nav id="links">
       <Link to="/">Home</Link>
       <Link to="/about">About</Link>
       <Link to="/shop">Shop</Link>
       <Link to="/myAccount">My Account</Link>
-      <Link to="/cart" id="cart">Cart</Link>  
+      <Link to="/cart" id="cart">
+        Cart
+      </Link>
     </nav>
   </div>
 )
 
 export default Navbar
-

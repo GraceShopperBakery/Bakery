@@ -6,15 +6,11 @@ import axios from 'axios'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const SET_CART = 'SET_CART'
 
-
 /**
  * INITIAL STATE
  */
 
 const defaultCart = {}
-
-export let prodTotal=0;
-
 
 /**
  * ACTION CREATORS
@@ -34,10 +30,6 @@ export const fetchCart = () => async dispatch => {
   try {
     const response = await axios.get('/api/cart')
     const cart = response.data
-    prodTotal = response.data.products.reduce((total, product) => {
-      return total + product.orderQty.quantity
-    }, 0)
-    cart.prodTotal = prodTotal
     const action = setCart(cart)
     dispatch(action)
   } catch (err) {
@@ -45,9 +37,13 @@ export const fetchCart = () => async dispatch => {
   }
 }
 
-export const addOrUpdateProduct = (productId, orderQty) => async dispatch => {
+export const addOrUpdateProduct = (
+  productId,
+  orderQty,
+  productPrice
+) => async dispatch => {
   try {
-    await axios.put(`/api/cart`, {productId, orderQty})
+    await axios.put(`/api/cart`, {productId, orderQty, productPrice})
     dispatch(fetchCart())
   } catch (err) {
     console.log(err)
@@ -70,7 +66,12 @@ export default function(state = defaultCart, action) {
     case SET_CART:
       return action.cart
     case REMOVE_PRODUCT:
-      return {...state, products: [...state.products.filter(product => product.id !== action.productId)]}
+      return {
+        ...state,
+        products: [
+          ...state.products.filter(product => product.id !== action.productId)
+        ]
+      }
     default:
       return state
   }
