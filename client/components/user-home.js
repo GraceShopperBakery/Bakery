@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
 import {fetchCart} from '../store/cart'
+import OrderHistory from './orderHistory'
 
 /**
  * COMPONENT
@@ -19,6 +20,7 @@ export const UserHome = props => {
           Logout
         </a>
       </div>
+      <OrderHistory />
     </div>
   )
 }
