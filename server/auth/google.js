@@ -51,7 +51,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     '/callback',
     passport.authenticate('google', {
       successRedirect: '/home',
-      failureRedirect: '/login'
+      failureRedirect: '/myaccount'
     })
   )
 }

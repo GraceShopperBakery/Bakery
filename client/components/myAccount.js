@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
-import {Link, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {fetchCart} from '../store/cart'
+import {Login, Signup} from './auth-form'
 
 const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
   return (
@@ -22,9 +23,26 @@ const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
         </div>
       ) : (
         <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <div id="myAccount">
+            <div id= 'loginContainer'>
+              <li id="loginhead">
+                First time hare... I mean here?
+              </li>
+              <li>
+                <Signup />
+              </li>
+            </div>
+
+            <div id= 'loginContainer'>
+              <li id="loginhead">
+                Already have an account?
+              </li>
+              <li>
+                <Login />
+              </li>
+            </div>
+
+          </div>
         </div>
       )}
     </div>

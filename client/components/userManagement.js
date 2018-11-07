@@ -39,13 +39,14 @@ class UserManagement extends Component {
   render() {
     return (
       <div className="adminManageUsers">
+        <div>
         <form
           className="form"
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
         >
           <h3>Add a user</h3>
-          <div className="form-group">
+          <div className="form-group" >
             <label htmlFor="email">Email *</label>
             <div className="form-control">
               <input
@@ -87,9 +88,11 @@ class UserManagement extends Component {
             Submit
           </button>
         </form>
-        <div className="users" />
-        <br />
-        <Users />
+        </div>
+        <div className="users" >
+          <br />
+          <Users />
+        </div>
       </div>
     )
   }
