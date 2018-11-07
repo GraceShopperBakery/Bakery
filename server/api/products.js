@@ -5,19 +5,19 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      include:{model: Category}
-    });
+      include: {model: Category}
+    })
     res.json(products)
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/categories', async (req,res,next) => {
-  try{
+router.get('/categories', async (req, res, next) => {
+  try {
     const categories = await Category.findAll({
-      include:{model: Product}
-    });
+      include: {model: Product}
+    })
 
     let result = []
     categories.map(category => {
@@ -26,7 +26,7 @@ router.get('/categories', async (req,res,next) => {
       }
     })
     res.json(result)
-  } catch(err){
+  } catch (err) {
     next(err)
   }
 })
@@ -59,7 +59,10 @@ router.get('/:productId/reviews', async (req, res, next) => {
   }
 })
 
-router.post('/', (req, res, next) => {
+
+//const isAdminMW = (req, res, next) => req.user.isAdmin ? next() : res.send("FORBIDDEN")
+
+router.post('/',  (req, res, next) => {
   let productInst;
   Product.create({
     title: req.body.title,
@@ -68,10 +71,11 @@ router.post('/', (req, res, next) => {
     imageURL: req.body.imageURL,
     inventoryQuantity: req.body.inventoryQuantity
   })
-    .then(product => { 
-      productInst = product;
-      let categories = req.body.category.map(category => 
-        Category.findOrCreate({ where: { name: category } }))
+    .then(product => {
+      productInst = product
+      let categories = req.body.category.map(category =>
+        Category.findOrCreate({where: {name: category}})
+      )
       return Promise.all(categories)
     })
     .then(categories => {
@@ -81,7 +85,7 @@ router.post('/', (req, res, next) => {
     })
     .then(product => res.status(201).send(product))
     .catch()
-});
+})
 
 router.post('/:productId/reviews', async (req, res, next) => {
   try {
@@ -99,7 +103,7 @@ router.post('/:productId/reviews', async (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   let productInst;
-  if(req.body.category){
+  if (req.body.category) {
     Product.findById(req.params.id, {include: {model: Category}}) 
     .then(product => product.update(req.body))
     .then(product => {
@@ -116,8 +120,8 @@ router.put('/:id', (req, res, next) => {
     .catch()
   }else{
     Product.findById(req.params.id)
-    .then(product => product.update(req.body))
-    .then(product => res.send(product))
-    .catch()
+      .then(product => product.update(req.body))
+      .then(product => res.send(product))
+      .catch()
   }
 })

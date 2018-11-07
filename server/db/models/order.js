@@ -7,42 +7,74 @@ const Order = db.define('order', {
     type: Sequelize.BOOLEAN,
     defaultValue: true
   },
-  finalTotal: {
-    type: Sequelize.FLOAT,
-    get() {
-      const totals =  OrderQty.findAll({
-        where: {
-          orderId: this.id
-        },
-        include: ['total']
-      })
-    },
-    set() {
-      this.getDataValue()
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: true,
+      notEmpty: true
     }
+  },
+  addressline1: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
+  },
+  addressline2: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
+  },
+  state: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true
+    }
+  },
+  zip: {
+    type: Sequelize.STRING,
+    validate: {
+      notEmpty: true,
+      isNumeric: true,
+      len: [5, 5]
+    }
+  },
+  finalTotal: {
+    type: Sequelize.STRING
+  },
+  qty: {
+    type: Sequelize.INTEGER
   }
 })
 
-
-
 module.exports = Order
 
-
-Order.prototype.getTotal = async function () {
-  const totals = await OrderQty.findAll({
+Order.prototype.getTotal = async function() {
+  const orderQuantities = await OrderQty.findAll({
     where: {
       orderId: this.id
     }
   })
-  console.log(totals, '******totals')
+
+  const total = orderQuantities.reduce((finalTotal, element) => {
+    return finalTotal + element.quantity * element.priceWhenOrdered
+  }, 0)
+  return total
 }
-// Order.beforeCreate(async function (instance) {
-//   const totals = await OrderQty.findAll({
-//     where: {
-//       orderId: instance.id
-//     }
-//   })
-//   console.log(totals, '******totals')
-// })
 
+Order.prototype.getQty = async function() {
+  const orderQuantities = await OrderQty.findAll({
+    where: {
+      orderId: this.id
+    }
+  })
 
+  const totalQty = orderQuantities.reduce((finalQty, element) => {
+    return finalQty + element.quantity
+  }, 0)
+  return totalQty
+}

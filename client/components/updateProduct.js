@@ -156,8 +156,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
     fetchProduct: (id) => dispatch(fetchProduct(id)),
-    adminUpdateProduct: (id, product) => dispatch(updateProduct(id, product)),
-    // fetchCategories: () => dispatch(fetchCategories())
+    adminUpdateProduct: (id, product) => dispatch(updateProduct(id, product))
   }
 }
 

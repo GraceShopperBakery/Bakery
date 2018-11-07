@@ -15,8 +15,12 @@ import {
   SingleProduct,
   AddProduct,
   UpdateProduct,
+  UserManagement,
+  Checkout,
+  OrderSuccess
 } from './components'
 import {me} from './store'
+import {fetchCart} from './store/cart'
 
 /**
  * COMPONENT
@@ -24,11 +28,11 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.fetchCart()
   }
 
   render() {
     const {isLoggedIn, isAdmin} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -40,22 +44,28 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        {isAdmin && (
-          <Switch>
-            {/* Routes placed here are only available to admin after logging in */}
-            <Route exact path="/admin" component={AdminHome} />
-            <Route path="/admin/addProduct" component={AddProduct} />
-            <Route path="/admin/updateProduct" component={UpdateProduct} />
-          </Switch>
-        )}
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/orderSuccess" component={OrderSuccess} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+
             <Route path="/home" component={UserHome} />
+            {isAdmin && (
+              <Switch>
+                {/* Routes placed here are only available to admin after logging in */}
+
+                <Route path="/admin/addProduct" component={AddProduct} />
+                <Route path="/admin/updateProduct" component={UpdateProduct} />
+                <Route path="/admin/users" component={UserManagement} />
+                <Route path="/admin" component={AdminHome} />
+              </Switch>
+            )}
           </Switch>
         )}
+
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route path="/" component={Home} />
       </Switch>
     )
   }
@@ -69,7 +79,8 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    isAdmin: state.user.isAdmin
+    isAdmin: state.user.isAdmin,
+    cart: state.cart
   }
 }
 
@@ -77,6 +88,9 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+    },
+    fetchCart() {
+      dispatch(fetchCart())
     }
   }
 }
