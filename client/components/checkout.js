@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import CheckoutForStripe from './stripeCheckout'
-import {updateCart} from '../store/cart'
+import {fetchCart, orderCompleteAndCartReset} from '../store/cart'
 
 class Checkout extends Component {
   constructor(props) {
@@ -25,6 +25,7 @@ class Checkout extends Component {
 
   handleClick() {
     this.props.updateCart(this.state)
+    this.props.fetchCart()
   }
 
   render() {
@@ -215,7 +216,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateCart: formData => dispatch(updateCart(formData))
+    updateCart: formData => dispatch(orderCompleteAndCartReset(formData)),
+    fetchCart() {
+      dispatch(fetchCart())
+    }
   }
 }
 

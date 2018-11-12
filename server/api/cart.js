@@ -11,7 +11,14 @@ router.get('/', async (req, res, next) => {
     if (req.user) {
       const user = await User.findById(req.user.id)
       const [usersCart] = await user.getOrders({where: {isCart: true}})
-      req.session.cartId = usersCart.id
+      //TODO
+      if (!usersCart) {
+        const newCart = await Order.create()
+        req.session.cartId = newCart.id
+      } else {
+        req.session.cartId = usersCart.id
+      }
+      console.log('req.session.cartId', req.session.cartId)
     }
     let cart = await Order.findById(req.session.cartId, {
       include: {model: Product}
@@ -70,15 +77,20 @@ router.put('/payment', async (req, res, next) => {
       zip: req.body.zip,
       finalTotal: finalTotal
     })
-    let newCart = await Order.create()
-    if (req.user) {
-      const user = await User.findById(req.user.id)
-      user.addCart(newCart)
+    let newCart
+    if (!req.user) {
+      req.session.destroy(async () => {
+        newCart = await Order.create()
+        req.session.cartId = newCart.id
+      })
     }
-    req.session.cartId = newCart.id
 
-    //decrease inventoryQty of product
-    res.send(order)
+    // if (req.user) {
+    //   const user = await User.findById(req.user.id)
+    //   user.addCart(newCart)
+    // }
+
+    res.send(newCart)
   } catch (err) {
     console.log(err)
   }
