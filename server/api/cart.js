@@ -12,6 +12,7 @@ router.get('/', async (req, res, next) => {
       const user = await User.findById(req.user.id)
       const [usersCart] = await user.getOrders({where: {isCart: true}})
       req.session.cartId = usersCart.id
+      console.log('req.session.cartId', req.session.cartId)
     }
     let cart = await Order.findById(req.session.cartId, {
       include: {model: Product}
@@ -60,6 +61,7 @@ router.put('/payment', async (req, res, next) => {
   try {
     let order = await Order.findById(req.session.cartId)
     const finalTotal = await order.getTotal()
+
     order.update({
       isCart: false,
       email: req.body.email,
@@ -70,15 +72,24 @@ router.put('/payment', async (req, res, next) => {
       zip: req.body.zip,
       finalTotal: finalTotal
     })
-    let newCart = await Order.create()
-    if (req.user) {
-      const user = await User.findById(req.user.id)
-      user.addCart(newCart)
-    }
-    req.session.cartId = newCart.id
 
-    //decrease inventoryQty of product
-    res.send(order)
+    const newCart = await Order.create()
+    console.log('Cart created on put route, id:', newCart.id)
+
+    if (!req.user) {
+      req.session.cartId = newCart.id
+    }
+
+    if (req.user) {
+      User.findById(req.user.id)
+        .then(user => {
+          console.log('Cart added to user on put route, id:', newCart.id)
+          return user.addOrder(newCart)
+        })
+        .catch()
+    }
+
+    res.send(newCart)
   } catch (err) {
     console.log(err)
   }

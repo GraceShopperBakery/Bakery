@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, fetchCategories} from '../store/products'
 
-import {addOrUpdateProduct} from '../store/cart'
+import {addOrUpdateProduct, fetchCart} from '../store/cart'
 
 class Shop extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class Shop extends Component {
   componentDidMount() {
     this.props.fetchProducts()
     this.props.fetchCategories()
+    this.props.fetchCart()
   }
 
   handleChange(event) {
@@ -43,9 +44,9 @@ class Shop extends Component {
     event.preventDefault()
     if (event.target.orderQty.value) {
       let productOrderQty = Number(event.target.orderQty.value)
-      let productInCart = this.props.cart.products.find(
-        product => product.id == productId
-      )
+      let productInCart =
+        this.props.cart.products &&
+        this.props.cart.products.find(product => product.id == productId)
       if (productInCart) {
         productOrderQty += productInCart.orderQty.quantity
       }
@@ -150,7 +151,8 @@ const mapDispatchToProps = dispatch => {
     fetchProducts: () => dispatch(fetchProducts()),
     fetchCategories: () => dispatch(fetchCategories()),
     addProduct: (productId, qty, price) =>
-      dispatch(addOrUpdateProduct(productId, qty, price))
+      dispatch(addOrUpdateProduct(productId, qty, price)),
+    fetchCart: () => dispatch(fetchCart())
   }
 }
 
