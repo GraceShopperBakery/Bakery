@@ -16,12 +16,16 @@ router.get('/', async (req, res, next) => {
 
 router.get('/orderHistory', async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id)
-    const orderHistory = await user.getOrders({
-      where: {isCart: false},
-      include: {model: Product}
-    })
-    res.json(orderHistory)
+    if (req.user) {
+      const user = await User.findById(req.user.id)
+      const orderHistory = await user.getOrders({
+        where: {isCart: false},
+        include: {model: Product}
+      })
+      res.json(orderHistory)
+    } else {
+      res.send(201)
+    }
   } catch (err) {
     next(err)
   }
