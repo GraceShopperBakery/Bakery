@@ -19,7 +19,7 @@ class Navbar extends Component {
             {this.props.isLoggedIn ? 'My Account' : 'Login / Sign up'}
           </Link>
           <Link to="/cart" id="cart">
-            {!this.props.cartQty ? 'Cart' : `Cart: ${this.props.cartQty}`}
+            {this.props.cartQty <= 0 ? 'Cart' : `Cart: ${this.props.cartQty}`}
           </Link>
         </nav>
       </div>
