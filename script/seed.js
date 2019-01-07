@@ -94,7 +94,7 @@ async function seed() {
     title: 'Bunny Bundts',
     description:
       "Make your friends and family 'hoppy' with this mosit cholocate cake with velvety cream cheese frosting.",
-    imageURL: 'https://bit.ly/2JFbg1l',
+    imageURL: 'https://bit.ly/2Rzcn96',
     price: 25.0
   })
   const bagel = await Product.create({

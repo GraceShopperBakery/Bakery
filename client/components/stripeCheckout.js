@@ -4,38 +4,59 @@ import StripeCheckout from 'react-stripe-checkout'
 import STRIPE_PUBLISHABLE from '../constants/stripe'
 import PAYMENT_SERVER_URL from '../constants/server'
 import history from '../history'
+import {resetCart} from '../store/cart'
+import {connect} from 'react-redux'
 
 const CURRENCY = 'USD'
 const fromDollarToCent = amount => amount * 100
 
-const successPayment = data => {
-  history.push('/orderSuccess')
+class Checkout extends React.Component {
+  // componentWillUnmount() {
+  //   this.props.resetCart()
+  // }
+
+  successPayment = data => {
+    history.push('/orderSuccess')
+    this.props.resetCart()
+    // console.log('resetCart()', resetCart())
+    // console.log('resetCart', resetCart)
+    // resetCart()
+  }
+
+  errorPayment = data => {
+    alert('Payment Error')
+  }
+
+  onToken = (amount, description) => token => {
+    axios
+      .post(PAYMENT_SERVER_URL, {
+        description,
+        source: token.id,
+        currency: CURRENCY,
+        amount: fromDollarToCent(amount)
+      })
+      .then(this.successPayment)
+      .catch(this.errorPayment)
+  }
+
+  render() {
+    return (
+      <StripeCheckout
+        name={this.props.name}
+        description={this.props.description}
+        amount={fromDollarToCent(this.props.amount)}
+        token={this.onToken(this.props.amount, this.props.description)}
+        currency={CURRENCY}
+        stripeKey={STRIPE_PUBLISHABLE}
+      />
+    )
+  }
 }
 
-const errorPayment = data => {
-  alert('Payment Error')
+const mapDispatchToProps = dispatch => {
+  return {
+    resetCart: () => dispatch(resetCart())
+  }
 }
 
-const onToken = (amount, description) => token =>
-  axios
-    .post(PAYMENT_SERVER_URL, {
-      description,
-      source: token.id,
-      currency: CURRENCY,
-      amount: fromDollarToCent(amount)
-    })
-    .then(successPayment)
-    .catch(errorPayment)
-
-const Checkout = ({name, description, amount}) => (
-  <StripeCheckout
-    name={name}
-    description={description}
-    amount={fromDollarToCent(amount)}
-    token={onToken(amount, description)}
-    currency={CURRENCY}
-    stripeKey={STRIPE_PUBLISHABLE}
-  />
-)
-
-export default Checkout
+export default connect(null, mapDispatchToProps)(Checkout)
