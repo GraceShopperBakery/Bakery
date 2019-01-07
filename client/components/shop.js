@@ -44,7 +44,7 @@ class Shop extends Component {
     if (event.target.orderQty.value) {
       let productOrderQty = Number(event.target.orderQty.value)
       let productInCart = this.props.cart.products.find(
-        product => product.id == productId
+        product => product.id === productId
       )
       if (productInCart) {
         productOrderQty += productInCart.orderQty.quantity

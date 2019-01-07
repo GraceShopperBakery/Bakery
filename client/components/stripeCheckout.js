@@ -11,16 +11,9 @@ const CURRENCY = 'USD'
 const fromDollarToCent = amount => amount * 100
 
 class Checkout extends React.Component {
-  // componentWillUnmount() {
-  //   this.props.resetCart()
-  // }
-
   successPayment = data => {
     history.push('/orderSuccess')
     this.props.resetCart()
-    // console.log('resetCart()', resetCart())
-    // console.log('resetCart', resetCart)
-    // resetCart()
   }
 
   errorPayment = data => {
