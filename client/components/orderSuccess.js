@@ -2,10 +2,12 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
+import {fetchOrders} from '../store/orderHistory'
 
 class OrderSuccess extends React.Component {
   componentDidMount() {
     this.props.fetchCart()
+    this.props.fetchOrders()
   }
   render() {
     return (
@@ -24,7 +26,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCart() {
       dispatch(fetchCart())
-    }
+    },
+    fetchOrders: () => dispatch(fetchOrders())
   }
 }
 
