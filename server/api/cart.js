@@ -10,7 +10,11 @@ router.get('/', async (req, res, next) => {
     }
     if (req.user) {
       const user = await User.findById(req.user.id)
-      const [usersCart] = await user.getOrders({where: {isCart: true}})
+      let [usersCart] = await user.getOrders({where: {isCart: true}})
+      //the if block is not needed, but is left in as a catch all
+      if (usersCart===undefined){
+        usersCart = await Order.create({userId: user.id})
+      }
       req.session.cartId = usersCart.id
     }
     let cart = await Order.findById(req.session.cartId, {
@@ -70,10 +74,11 @@ router.put('/payment', async (req, res, next) => {
       zip: req.body.zip,
       finalTotal: finalTotal
     })
-    let newCart = await Order.create()
+    let newCart;
     if (req.user) {
-      const user = await User.findById(req.user.id)
-      user.addCart(newCart)
+      newCart = await Order.create({userId: req.user.id})
+    } else{
+      newCart = await Order.create()
     }
     req.session.cartId = newCart.id
 
