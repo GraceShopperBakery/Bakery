@@ -672,6 +672,11 @@ nav a {
   justify-items: center;
 }
 
+#logout {
+  font-size: 1.5em;
+  align: right;
+}
+
 /* admin user management */
 
 .adminManageUsers{
