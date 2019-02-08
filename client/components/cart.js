@@ -25,7 +25,7 @@ class Cart extends Component {
     let total = 0
     if (cartProducts.length === 0) {
       return (
-        <div className="cartError">
+        <div className="cartError cart">
           <h1>CART</h1>
           <div className="error">
             Your cart does not contain any products yet.

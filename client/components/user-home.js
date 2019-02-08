@@ -13,7 +13,6 @@ export const UserHome = props => {
 
   return (
     <div>
-
       <div id='logout'>
         <a href="#" onClick={props.handleClick}>
           Logout

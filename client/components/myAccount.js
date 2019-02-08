@@ -10,7 +10,7 @@ const MyAccount = ({handleClick, isLoggedIn, isAdmin}) => {
   return (
     <div>
       {isLoggedIn ? (
-        <div>
+        <div id="logout">
           {/* The navbar will show these links after you log in */}
           <a href="#" onClick={handleClick}>
             Logout
