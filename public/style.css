@@ -289,7 +289,31 @@ nav a {
   width: 100vw;
 }
 
-#title h1 {
+#NavbarMobile {
+  display: none;
+  border-bottom: 1px solid rgb(183, 183, 183);
+  position: sticky;
+  color: #b7b7b7;
+  background-color: white;
+  z-index: 1;
+  width: 95vw;
+}
+
+#NavbarMobile #mainNav {
+  justify-content: space-between;
+  align-items: center;
+}
+
+#NavbarMobile img {
+  height: 30px;
+  margin: 4px;
+}
+
+#NavbarMobile #cartIcon {
+  margin-right: 10px;
+}
+
+.title h1 {
   font-family: 'Homemade Apple', cursive;
   color: #dabc85;
   font-size: 300%;
@@ -787,6 +811,20 @@ nav a {
   }
 }
 
+/* navbar responsive */
+
+@media only screen and (max-width: 750px) {
+  #links {
+    width: 50vw;
+    height: 100%;
+  }
+
+  nav a {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+  }
+}
+
 /* mobile */
 
 @media only screen and (max-width: 550px) {
@@ -798,5 +836,41 @@ nav a {
     width: 40vw;
     height: 40vw;
   }
+
+  #NavBar {
+    display: none;
+    /*
+    text-align: center;
+    display: flex;
+    /* flex-direction: column; */
+    /* align-content: center;
+    align-items: center; */
+    /* justify-content: space-between;
+    justify-items: center; */
+    /* height: 20%;
+    color: #b7b7b7;
+    border-bottom: 1px solid rgb(183, 183, 183);
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    width: 100vw; */
+  }
+  
+  #NavbarMobile {
+    display: inline-block;
+  }
+
+  #NavbarMobile #mainNav {
+    display: flex;
+  }
+
+  .title h1 {
+    font-size: 200%;
+    padding: 0 0 0 5%;
+    margin: 0;
+  }
+
+
    
 }

@@ -6,7 +6,7 @@ class Navbar extends Component {
   render() {
     return (
       <div id="NavBar">
-        <div id="title">
+        <div className="title">
           <Link to="/">
             <h1>Hopper</h1>
           </Link>
