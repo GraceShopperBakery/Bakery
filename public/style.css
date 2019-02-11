@@ -293,13 +293,14 @@ nav a {
   display: none;
   background-color: white;
   z-index: 1;
-  width: 95vw;
+  width: 100vw;
   position: sticky;
   color: #b7b7b7;
 }
 
 #NavbarMobile #mainNav {
   display: flex;
+  width: 95vw;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgb(183, 183, 183);
@@ -845,6 +846,11 @@ nav a {
 /* mobile */
 
 @media only screen and (max-width: 550px) {
+  body {
+    margin: 0;
+    padding: 2.5vw;
+  }
+
   .teamContainer figure {
     width: 90%;
   }
@@ -856,31 +862,33 @@ nav a {
 
   #NavBar {
     display: none;
-    /*
-    text-align: center;
-    display: flex;
-    /* flex-direction: column; */
-    /* align-content: center;
-    align-items: center; */
-    /* justify-content: space-between;
-    justify-items: center; */
-    /* height: 20%;
-    color: #b7b7b7;
-    border-bottom: 1px solid rgb(183, 183, 183);
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1;
-    width: 100vw; */
   }
   
   #NavbarMobile {
     display: inline-block;
+    width: 100%;
   }
 
   #NavbarMobile #mainNav {
     display: flex;
   }
+  
+
+  #NavbarMobile #links {
+    padding: 0;
+    padding-top: 5%;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  #NavbarMobile #links a{
+    display: block;
+    text-align: center;
+    font-size: 1.3em;
+    margin: 1.2em 0 1.2em 0
+  }
+
 
   .title h1 {
     font-size: 200%;

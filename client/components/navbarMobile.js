@@ -3,22 +3,25 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class NavbarMobile extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      expanded: false
+    }
+    this.toggleMenu = this.toggleMenu.bind(this)
+  }
+
+  toggleMenu() {
+    this.setState(state => ({expanded: !state.expanded}))
+  }
+
+  
   render() {
     return (
-      <div id="NavbarMobile">
+      <div id="NavbarMobile" >
         <div id="mainNav">
-          {/* <nav id="links">
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/shop">Shop</Link>
-          <Link to="/myAccount">
-            {this.props.isLoggedIn ? 'My Account' : 'Login / Sign up'}
-          </Link>
-          <Link to="/cart" id="cart">
-            {this.props.cartQty <= 0 ? 'Cart' : `Cart: ${this.props.cartQty}`}
-          </Link>
-        </nav> */}
-          <img src="/images/menuIcon.png" id="menuIcon" alt="menu icon" />
+          <img onClick={this.toggleMenu} src="/images/menuIcon.png" id="menuIcon" alt="menu icon" />
           <div className="title">
             <Link to="/">
               <h1>Hopper</h1>
@@ -29,7 +32,19 @@ class NavbarMobile extends Component {
             {this.props.cartQty > 0 ? <div id="cartAmount">{this.props.cartQty}</div> : null}
           </Link>
         </div>
-        
+        <div onClick={this.toggleMenu} hidden={this.state.expanded ? false : true} id="expandedMenu" >
+          <nav id="links">
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/shop">Shop</Link>
+            <Link to="/myAccount">
+              {this.props.isLoggedIn ? 'My Account' : 'Login / Sign up'}
+            </Link>
+            <Link to="/cart" id="cart">
+              {this.props.cartQty <= 0 ? 'Cart' : `Cart: ${this.props.cartQty}`}
+            </Link>
+          </nav>
+        </div>
       </div>
     )
   }
