@@ -7,7 +7,7 @@ const OrderSuccess = props => {
       <h1>Payment Successful</h1>
       <div className="error">Thank you for shopping with us!</div>
       <button className="return" type="button">
-        <Link to="/shop">Browse Products</Link>
+        <Link to="/shop">Browse<br />Products</Link>
       </button>
     </div>
   )
