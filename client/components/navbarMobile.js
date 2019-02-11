@@ -24,11 +24,12 @@ class NavbarMobile extends Component {
               <h1>Hopper</h1>
             </Link>
           </div>
-          <Link to="/cart" id="cartIcon">
-            <img src="/images/cart.png" alt="cart icon" />
+          <Link to="/cart" id="cartIconContainer">
+            <img id="cartIcon" src="/images/cart.png" alt="cart icon" />
+            {this.props.cartQty > 0 ? <div id="cartAmount">{this.props.cartQty}</div> : null}
           </Link>
         </div>
-        {this.props.cartQty > 0 ? <span id="cartAmount">{this.props.cartQty}</span> : null}
+        
       </div>
     )
   }

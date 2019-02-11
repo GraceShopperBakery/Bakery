@@ -28,10 +28,10 @@ class Cart extends Component {
         <div className="cartError cart">
           <h1>CART</h1>
           <div className="error">
-            Your cart does not contain any products yet.
+            Your cart does not contain any products&nbsp;yet.
           </div>
           <button className="return" type="button">
-            <Link to="/shop">Browse Products</Link>
+            <Link to="/shop">Browse<br />Products</Link>
           </button>
         </div>
       )

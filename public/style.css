@@ -291,17 +291,18 @@ nav a {
 
 #NavbarMobile {
   display: none;
-  border-bottom: 1px solid rgb(183, 183, 183);
-  position: sticky;
-  color: #b7b7b7;
   background-color: white;
   z-index: 1;
   width: 95vw;
+  position: sticky;
+  color: #b7b7b7;
 }
 
 #NavbarMobile #mainNav {
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid rgb(183, 183, 183);
 }
 
 #NavbarMobile img {
@@ -310,7 +311,23 @@ nav a {
 }
 
 #NavbarMobile #cartIcon {
-  margin-right: 10px;
+  margin-right: 20px;
+}
+
+#NavbarMobile #cartAmount {
+  margin: 0;
+  padding: 0.2em;
+  position: absolute;
+  transform: translate(85%, -190%);
+  border-radius: 50%;
+  color: white;
+  background-color: #b7b7b7;
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  justify-content: center 
 }
 
 .title h1 {
@@ -451,7 +468,7 @@ nav a {
 }
 
 .return {
-  width: 30%;
+  min-width: 30%;
   font-size: 2em;
   margin: 5%;
   background-color: rgb(183, 183, 183);
@@ -870,7 +887,4 @@ nav a {
     padding: 0 0 0 5%;
     margin: 0;
   }
-
-
-   
 }
