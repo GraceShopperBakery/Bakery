@@ -11,7 +11,7 @@ const About = props => {
         Hopper is a dessert empire and lifestyle brand, called “one of the most exciting bakeries in the country” by Bon Appétit magazine. 
         Hopper opened its doors in NYC’s Financial District in 2018, and quickly became a cult sensation. 
         With wildly popular storefronts in New York City, Washington, D.C., Toronto, Dallas, Vienna, Newburgh, Las Vegas and most recently, Los Angeles, Hopper is known for its familiar yet unexpected desserts 
-        including Carrot Compost Cookie, “naked” layer cakes with unfrosted sides, and Carrot macarons, among other playful and craveable treats. Hop on over today!
+        including Carrot Compost Cookie, “naked” layer cakes with unfrosted sides, and Carrot macarons, among other playful and craveable treats. Hop on over&nbsp;today!
       </p>
       </div>
       <div className="Team">
@@ -22,7 +22,7 @@ const About = props => {
           <h5>Alizah</h5>
           <span>Pastry Chef</span>
           <p>Alizah studied the art of pastry making in Paris, France.
-            She crafts every pastry with a bunny in mind.
+            She crafts every pastry with a bunny in&nbsp;mind.
           </p>
         </figure>
         <figure>
@@ -30,7 +30,7 @@ const About = props => {
           <h5>Micaela</h5>
           <span>Bunny Keeper</span>
           <p>Micaela is our resident bunny expert.
-            She enjoys long walks on the beach, with a carrot in hand.
+            She enjoys long walks on the beach, with a carrot in&nbsp;hand.
           </p>
         </figure>
         <figure>
@@ -38,7 +38,7 @@ const About = props => {
           <h5>Magdalena</h5>
           <span>Taste Tester</span>
           <p>Magdalena loved our pastries so much, we hired her to taste them professionally.
-            If Magdalena doens't taste it, we don't sell it.
+            If Magdalena doesn't taste it, we don't sell&nbsp;it.
           </p>
         </figure>
         <figure>

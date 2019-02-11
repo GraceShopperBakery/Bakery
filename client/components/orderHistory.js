@@ -10,7 +10,7 @@ class OrderHistory extends Component {
 
   render() {
     return (
-      <div>
+      <div className="orderHistory">
         <h1>Order History</h1>
         <div>
           {this.props.orderHistory.map(order => (
