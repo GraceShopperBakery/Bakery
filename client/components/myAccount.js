@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {logout} from '../store/user'
+import {logout} from '../store'
 import {Redirect} from 'react-router-dom'
 import {fetchCart} from '../store/cart'
 import {Login, Signup} from './auth-form'
