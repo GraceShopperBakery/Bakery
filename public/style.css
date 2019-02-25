@@ -114,7 +114,6 @@ textarea {
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.75em;
-  /* margin-left: 5%; */
   cursor: pointer;
 }
 
@@ -274,11 +273,8 @@ nav a {
 #NavBar {
   text-align: center;
   display: flex;
-  /* flex-direction: column; */
   align-content: center;
   align-items: center;
-  /* justify-content: space-between;
-  justify-items: center; */
   height: 20%;
   color: #b7b7b7;
   border-bottom: 1px solid rgb(183, 183, 183);
@@ -522,7 +518,6 @@ nav a {
 
 .centertbody {
   text-align: center;
-  /* color: #rgb(183, 183, 183); */
 }
 
 #remove {
@@ -593,7 +588,6 @@ nav a {
 }
 
 .total button {
-  /* width: 80%; */
   font-size: 2em;
   background-color: #db6097;
   color: white;
@@ -722,7 +716,6 @@ nav a {
   text-align: right;
   padding: 2%;
   padding-bottom: 0;
-  /*height: 20%;*/
   font-family: 'Lato', sans-serif;
   font-style: normal;
 }
@@ -762,6 +755,7 @@ nav a {
   flex-direction: row;
   display: flex
 }
+
 .addReviewForm{
   align-content: center;
   align-content: flex-start;
@@ -783,7 +777,6 @@ nav a {
 .shop img {
   display: block;
   margin: auto;
-
 }
 
 .addReviewForm input {
@@ -805,18 +798,6 @@ nav a {
   .teamContainer figure {
     width: 45%;
   }
-/* 
-  body {
-    font-size: 16px;
-  }
-
-  .teamContainer h5 {
-    font-size: 1.5em
-  }
-
-  .teamContainer span {
-    font-size: 1.2em
-  } */
 
   .teamContainer p {
     margin-top: 0.6em;
