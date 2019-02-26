@@ -195,6 +195,7 @@ textarea {
   justify-items: center;
   text-align: center;
   width: 85%;
+  align-self: center;
 }
 
 .products a,
@@ -898,10 +899,24 @@ nav a {
 
   .allProductsPage {
     flex-direction: column;
+    align-content: center;
   }
 
   .categoryFilters {
     position: initial;
     width: 85%;
+  }
+
+  .box {
+    height: auto;
+    margin-top: 5%;
+  }
+
+  .box a {
+    margin-bottom: 4%;
+  }
+
+  .products {
+    align-self: center;
   }
 }

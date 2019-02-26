@@ -121,7 +121,7 @@ async function seed() {
   const cookie = await Product.create({
     title: 'Ear-resistable Cookie',
     description: 'Sugar cookie, vanilla frosting. Melts in your mouth.',
-    imageURL: 'https://bit.ly/2AOUNox',
+    imageURL: 'https://bit.ly/2VoZWuR',
     price: 3.0
   })
   const bunnyChow = await Product.create({
@@ -135,7 +135,7 @@ async function seed() {
   const lemonPie = await Product.create({
     title: 'Lemon Hareingue Pie',
     description: 'Lemon custard filling with a fluffy meringue topping.',
-    imageURL: 'https://bit.ly/2yUG7Te',
+    imageURL: 'https://bit.ly/2EdFiqI',
     price: 18.0
   })
   const oats = await Product.create({
