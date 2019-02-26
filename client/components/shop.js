@@ -84,7 +84,8 @@ class Shop extends Component {
                 <div className="spacing">
                   <Link to={`/shop/${product.id}`}>
                     <div className="product-figure">{product.title}
-                    </div><img
+                    </div>
+                    <img
                       src={product.imageURL}
                       alt={product.title}
                       width="300px"
