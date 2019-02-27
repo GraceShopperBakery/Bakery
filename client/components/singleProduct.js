@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchProduct } from '../store/products'
 import { addOrUpdateProduct } from '../store/cart'
+
+
 class SingleProduct extends Component {
 
-  // constructor(props) { 
-  //   super(props)
-  //   // this.handleAddToCart = this.handleAddToCart.bind(this)
-  // }
+  constructor(props) { 
+    super(props)
+    this.handleAddToCart = this.handleAddToCart.bind(this)
+  }
 
   componentDidMount() {
     const id = this.props.match.params.productId
