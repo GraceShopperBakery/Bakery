@@ -21,7 +21,7 @@ class NavbarMobile extends Component {
     return (
       <div id="NavbarMobile" >
         <div id="mainNav">
-          <img onClick={this.toggleMenu} src="/images/menuIcon.png" id="menuIcon" alt="menu icon" />
+          {this.state.expanded ? <img onClick={this.toggleMenu} src="/images/closeIcon.png" id="menuIcon" alt="close menu icon" /> : <img onClick={this.toggleMenu} src="/images/menuIcon.png" id="menuIcon" alt="menu icon" />}  
           <div className="title">
             <Link to="/">
               <h1>Hopper</h1>

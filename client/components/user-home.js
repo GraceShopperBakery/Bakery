@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {logout} from '../store'
+import {logout} from '../store/user'
 import {fetchCart} from '../store/cart'
 import OrderHistory from './orderHistory'
 
@@ -9,7 +9,6 @@ import OrderHistory from './orderHistory'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
 
   return (
     <div>
@@ -26,11 +25,7 @@ export const UserHome = props => {
 /**
  * CONTAINER
  */
-const mapStateToProps = state => {
-  return {
-    email: state.user.email
-  }
-}
+
 const mapDispatchToProps = dispatch => {
   return {
     handleClick() {
@@ -39,7 +34,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserHome)
+export default connect(null, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES
