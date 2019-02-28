@@ -78,8 +78,7 @@ textarea {
 }
 
 .shop {
-  width: 70%;
-  padding-left: 15%;
+  padding: 15%;
 }
 
 .shop .box {
@@ -114,7 +113,6 @@ textarea {
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.75em;
-  /* margin-left: 5%; */
   cursor: pointer;
 }
 
@@ -136,7 +134,7 @@ textarea {
 }
 
 .categoryFilters select {
-  width: 100%;
+  width: 105%;
   border: 1px solid #dabc85;
   border-radius: 0px;
   color: #dabc85;
@@ -151,9 +149,9 @@ textarea {
 .box {
   border: 1px solid #dabc85;
   margin-left: 5%;
-  margin-top: 2%;
+  margin-top: 15%;
   width: 100%;
-  height: 176px;
+  height: auto;
   color: white;
   word-wrap: normal;
   justify-content: center;
@@ -161,6 +159,7 @@ textarea {
   align-items: center;
   background-color: #db6097;
   border-radius: 6px;
+  padding: 2%
 }
 
 .box h1 {
@@ -168,9 +167,11 @@ textarea {
 }
 
 .box a {
+  display: block;
   color: white;
   word-wrap: normal;
   padding: 2px;
+  margin-bottom: 10%;
   font-weight: bold;
   font-size: 1.5em;
 }
@@ -193,6 +194,7 @@ textarea {
   justify-items: center;
   text-align: center;
   width: 85%;
+  align-self: center;
 }
 
 .products a,
@@ -206,7 +208,7 @@ li {
   font-weight: bold;
 }
 
-.products a:hover {
+.product-figure:hover {
   color: #dabc85;
 }
 
@@ -217,10 +219,6 @@ li {
   align-items: center;
   justify-items: center;
   padding: 2%;
-}
-
-.product-figure a {
-  text-align: left;
   font-size: 1.5em;
 }
 
@@ -233,27 +231,32 @@ li {
   padding: 2%;
   border-bottom-left-radius: 2%;
   border-bottom-right-radius: 2%;
+  width: 100%;
 }
 
 .checkout li {
   width: 30%;
   text-align: center;
-  color: rgb(183, 183, 183);
+  /* color: rgb(183, 183, 183); */
   font-weight: bold;
   font-size: 1.5em;
 }
 
 .checkout button {
-  width: 100%;
-  border: none;
-  color: rgb(183, 183, 183);
+  border: solid 1px #dabc85;
+  border-radius: 3px;
+  padding: 5%;
+  margin: 5%;
+  color:#dabc85;
   font-weight: bold;
   font-size: 1em;
   outline: none;
+  background-color: white;
 }
 
 .checkout button:hover {
-  color: #dabc85;
+  background-color: #db6097;
+  color: white;
   cursor: pointer;
 }
 
@@ -274,11 +277,8 @@ nav a {
 #NavBar {
   text-align: center;
   display: flex;
-  /* flex-direction: column; */
   align-content: center;
   align-items: center;
-  /* justify-content: space-between;
-  justify-items: center; */
   height: 20%;
   color: #b7b7b7;
   border-bottom: 1px solid rgb(183, 183, 183);
@@ -522,7 +522,6 @@ nav a {
 
 .centertbody {
   text-align: center;
-  /* color: #rgb(183, 183, 183); */
 }
 
 #remove {
@@ -593,7 +592,6 @@ nav a {
 }
 
 .total button {
-  /* width: 80%; */
   font-size: 2em;
   background-color: #db6097;
   color: white;
@@ -722,7 +720,6 @@ nav a {
   text-align: right;
   padding: 2%;
   padding-bottom: 0;
-  /*height: 20%;*/
   font-family: 'Lato', sans-serif;
   font-style: normal;
 }
@@ -758,15 +755,83 @@ nav a {
   margin-left: 5%;
 }
 
-.shop .addReviewForm{
-  flex-direction: row;
-  display: flex
+/* single product */
+
+.shop {
+  margin: 0 10% 0 10%;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color:  rgb(183, 183, 183); */
 }
-.addReviewForm{
-  align-content: center;
-  align-content: flex-start;
-  justify-content: space-around;
+
+.shop .product-info {
+  display: flex;
+}
+
+.shop .product-description {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.shop .checkout {
+  width: 100%;
+}
+
+.shop .quantity {
+  width: 30vw;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.shop .product-price-checkout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.shop p {
+  font-size: 1em;
+  font-weight: 400;
+  text-align: left;
+  flex-basis: 2;
+  flex-shrink: 1;
+  flex-grow: 2;
+}
+
+.shop img {
+  margin: 3%;
+  flex-basis: 1;
+}
+
+.shop button {
+  padding: 2%;
+}
+
+.shop label {
+  width: auto;
+}
+
+.shop h2 {
+  padding: 2.5%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  width: 75%;
   text-align: center;
+  color:rgb(183, 183, 183);
+  border-bottom: solid 0.5px rgb(183, 183, 183)
+}
+
+#end {
+  text-align: center;
+  width: 75%;
+  border-bottom: solid 0.5px rgb(183, 183, 183);
+  font-size: 0.1em;
 }
 
 .single-figure {
@@ -780,10 +845,16 @@ nav a {
   justify-items: center;
 }
 
-.shop img {
-  display: block;
-  margin: auto;
+.shop .addReviewForm{
+  flex-direction: row;
+  display: flex
+}
 
+.addReviewForm{
+  align-content: center;
+  align-content: flex-start;
+  justify-content: space-around;
+  text-align: center;
 }
 
 .addReviewForm input {
@@ -792,6 +863,7 @@ nav a {
   font-size: 100%;
   color:  rgb(183, 183, 183);
 }
+
 
 /* responsive design */
 
@@ -805,18 +877,6 @@ nav a {
   .teamContainer figure {
     width: 45%;
   }
-/* 
-  body {
-    font-size: 16px;
-  }
-
-  .teamContainer h5 {
-    font-size: 1.5em
-  }
-
-  .teamContainer span {
-    font-size: 1.2em
-  } */
 
   .teamContainer p {
     margin-top: 0.6em;
@@ -827,8 +887,28 @@ nav a {
     width: 25vw;
     height: 25vw;
   }
+
+  .box {
+   height: 25vh;
+  }
+
+  .shop .product-price-checkout {
+    flex-direction: column;
+    /* align-content: flex-end; */
+  }
+
+  .shop .checkout {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .shop .quantity {
+    flex-direction: column-reverse;
+  }
 }
 
+/* intermediate step */
 /* navbar responsive */
 
 @media only screen and (max-width: 750px) {
@@ -840,6 +920,27 @@ nav a {
   nav a {
     margin-top: 0.6em;
     margin-bottom: 0.6em;
+  }
+
+  .box {
+    font-size: 0.9em;
+  }
+
+  .shop .product-info {
+    flex-direction: column;
+    /* text-align: center; */
+    align-items: center;
+    /* justify-content: center; */
+  }
+
+  .shop p {
+    text-align: center;
+  }
+
+  .shop .product-price-checkout {
+    align-self: center;
+    width: auto;
+    justify-items: space-between;
   }
 }
 
@@ -873,7 +974,6 @@ nav a {
     display: flex;
   }
   
-
   #NavbarMobile #links {
     padding: 0;
     padding-top: 5%;
@@ -889,10 +989,33 @@ nav a {
     margin: 1.2em 0 1.2em 0
   }
 
-
   .title h1 {
     font-size: 200%;
     padding: 0 0 0 5%;
     margin: 0;
   }
+
+  .allProductsPage {
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .categoryFilters {
+    position: initial;
+    width: 85%;
+  }
+
+  .box {
+    height: auto;
+    margin-top: 5%;
+  }
+
+  .box a {
+    margin-bottom: 4%;
+  }
+
+  .products {
+    align-self: center;
+  }
+
 }

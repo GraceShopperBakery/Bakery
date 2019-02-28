@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchProducts, fetchCategories} from '../store/products'
-
 import {addOrUpdateProduct} from '../store/cart'
 
 class Shop extends Component {
@@ -82,17 +81,16 @@ class Shop extends Component {
             <div key={product.id}>
               <figure className="product">
                 <div className="spacing">
-                  <div className="product-figure">
-                    <Link to={`/shop/${product.id}`}>{product.title}</Link>
-                  </div>
-
-                  <img
-                    src={product.imageURL}
-                    alt={product.title}
-                    width="300px"
-                    height="300px"
-                  />
-
+                  <Link to={`/shop/${product.id}`}>
+                    <div className="product-figure">{product.title}
+                    </div>
+                    <img
+                      src={product.imageURL}
+                      alt={product.title}
+                      width="300px"
+                      height="300px"
+                    />
+                  </Link>
                   <div>
                     <form
                       className="checkout"
